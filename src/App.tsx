@@ -651,33 +651,45 @@ function TemplateMockup({ item }: { item: TemplateItem }) {
 
 const projects = [
   {
-    badge: "Event & Ticketing",
-    title: "Tixora Event Platform",
-    result: "Proses check-in 70% lebih cepat",
-    color: "#6857ee",
+    badge: "Web App & Ticketing",
+    title: "Teman Tix Platform",
+    url: "https://temantix.com/",
+    description:
+      "Platform e-ticketing konser & festival musik dengan pencarian event, checkout instan, e-ticket digital otomatis, dan integrasi payment gateway.",
+    result: "50rb+ Pengguna & Transaksi Instan",
+    color: "#d97706",
     content: (
-      <div className="flex h-full items-center justify-center bg-[linear-gradient(145deg,#151b35,#2b2963)] p-6">
-        <div className="w-full max-w-[310px] rotate-[-2deg] rounded-2xl bg-white p-3 shadow-2xl">
-          <div className="rounded-xl bg-[#f5f4ff] p-4">
-            <div className="flex justify-between">
-              <b className="text-xs text-[#181c39]">TIXORA</b>
-              <span className="rounded bg-violet-600 px-2 py-1 text-[7px] text-white">Explore</span>
+      <div className="group relative h-full w-full overflow-hidden bg-[#0c0d12]">
+        <img
+          src="/portfolio/temantix.jpg"
+          alt="Teman Tix - Platform Tiket Event"
+          className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0c0d12]/95 via-[#0c0d12]/25 to-transparent" />
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-black/75 backdrop-blur border border-amber-500/40 px-2.5 py-1 text-[10px] font-bold text-amber-300">
+            <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            temantix.com
+          </span>
+          <span className="rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 text-[9px] font-extrabold uppercase">
+            Live Production
+          </span>
+        </div>
+        <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+          <div>
+            <div className="flex items-center gap-1.5">
+              <span className="rounded bg-[#f59e0b] px-1.5 py-0.5 text-[10px] font-black text-slate-950">
+                Teman
+              </span>
+              <span className="text-white font-black text-xs">Tix</span>
             </div>
-            <div className="mt-4 h-20 rounded-lg bg-gradient-to-r from-violet-700 to-fuchsia-500 p-3 text-white">
-              <div className="text-[7px] uppercase tracking-widest">Upcoming festival</div>
-              <div className="mt-1 text-lg font-black">SOUNDFLOW</div>
-            </div>
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              {["Music", "Creative", "Sport"].map((x) => (
-                <div
-                  key={x}
-                  className="rounded bg-white p-2 text-[7px] font-semibold text-slate-500"
-                >
-                  {x}
-                </div>
-              ))}
+            <div className="text-slate-300 text-[10px] mt-0.5">
+              Sumunar Fest &amp; Event Favorit
             </div>
           </div>
+          <span className="rounded-lg bg-amber-500 text-slate-950 font-black text-[9px] px-2 py-1 shadow">
+            Beli Tiket
+          </span>
         </div>
       </div>
     ),
@@ -685,6 +697,8 @@ const projects = [
   {
     badge: "Manufaktur",
     title: "Nusa Furni Catalog",
+    description:
+      "Website showcase furnitur ekspor dengan katalog spesifikasi interaktif dan jalur pemesanan WhatsApp langsung ke tim sales.",
     result: "Inquiry produk naik 2,4x",
     color: "#b77c45",
     content: (
@@ -709,6 +723,8 @@ const projects = [
   {
     badge: "Organisasi",
     title: "Jogja Creative Hub",
+    description:
+      "Ruang kolaborasi dan direktori kreator dengan kalender agenda kegiatan serta sistem pendaftaran workshop online.",
     result: "1.200+ member terhubung",
     color: "#0b91a6",
     content: (
@@ -1281,24 +1297,47 @@ export default function App() {
               {projects.map((project) => (
                 <article
                   key={project.title}
-                  className="portfolio-card overflow-hidden rounded-[22px] border border-[#e2e9f1] bg-white transition duration-300 hover:-translate-y-1"
+                  className="portfolio-card overflow-hidden rounded-[22px] border border-[#e2e9f1] bg-white transition duration-300 hover:-translate-y-1 flex flex-col justify-between"
                 >
-                  <div className="h-[260px] overflow-hidden">{project.content}</div>
-                  <div className="p-6">
-                    <span
-                      className="inline-flex rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[.1em]"
-                      style={{ color: project.color, backgroundColor: `${project.color}13` }}
-                    >
-                      {project.badge}
-                    </span>
-                    <h3 className="mt-4 text-xl font-extrabold tracking-[-.025em]">
-                      {project.title}
-                    </h3>
-                    <div className="mt-5 flex items-center gap-2 border-t border-slate-100 pt-4 text-[12px] font-bold text-[#159a7f]">
-                      <span className="grid size-5 place-items-center rounded-full bg-emerald-100">
+                  <div>
+                    <div className="h-[260px] overflow-hidden">{project.content}</div>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <span
+                          className="inline-flex rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[.1em]"
+                          style={{ color: project.color, backgroundColor: `${project.color}15` }}
+                        >
+                          {project.badge}
+                        </span>
+                        {project.url && (
+                          <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300/80 bg-amber-50 px-2.5 py-1 text-[11px] font-bold text-amber-800 hover:bg-amber-100 transition shadow-xs"
+                          >
+                            <span>Buka temantix.com</span>
+                            <i className="fa-solid fa-arrow-up-right-from-square text-[10px]" />
+                          </a>
+                        )}
+                      </div>
+                      <h3 className="mt-3.5 text-xl font-extrabold tracking-[-.025em] text-[#0b1d35]">
+                        {project.title}
+                      </h3>
+                      {project.description && (
+                        <p className="mt-2 text-xs text-slate-500 leading-relaxed min-h-[36px]">
+                          {project.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="p-6 pt-0">
+                    <div className="flex items-center gap-2 border-t border-slate-100 pt-4 text-[12px] font-bold text-[#159a7f]">
+                      <span className="grid size-5 place-items-center rounded-full bg-emerald-100 shrink-0">
                         <Icon name="arrow" className="size-3 -rotate-45" />
                       </span>
-                      {project.result}
+                      <span>{project.result}</span>
                     </div>
                   </div>
                 </article>

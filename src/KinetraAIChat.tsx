@@ -178,8 +178,14 @@ export default function KinetraAIChat() {
           "• Portal Pelanggan & Karyawan (Multi-Role)\n" +
           "• Sistem Reservasi / Booking Online Kompleks\n" +
           "• Integrasi Payment Gateway (QRIS, VA Bank) & Notifikasi WA Otomatis\n\n" +
-          "Estimasi biaya disesuaikan dengan alur proses dan spesifikasi teknis bisnis Anda.",
+          "Salah satu portofolio Web Application nyata kami: Teman Tix (https://temantix.com) — platform e-ticketing konser & event dengan 50rb+ pengguna aktif!",
         actions: [
+          {
+            label: "Buka Teman Tix (temantix.com)",
+            icon: "fa-solid fa-arrow-up-right-from-square",
+            href: "https://temantix.com/",
+            isExternal: true,
+          },
           {
             label: "Konsultasikan Web App via WA",
             icon: "fa-brands fa-whatsapp",
@@ -279,15 +285,23 @@ export default function KinetraAIChat() {
     ) {
       return {
         reply:
-          "Kami telah menyediakan berbagai live demo template siap pakai untuk aneka sektor bisnis lokal:\n\n" +
+          "Kami memiliki portofolio proyek live serta katalog template siap pakai:\n\n" +
+          "Portofolio Live Web Application:\n" +
+          "• Teman Tix (https://temantix.com) - Platform e-ticketing konser & event (50rb+ pengguna)\n\n" +
+          "Katalog Template Siap Pakai:\n" +
           "• Medika Care (Klinik & Faskes 24 Jam)\n" +
           "• Ruang Singgah (Kos, Penginapan & Properti)\n" +
           "• Dapur Rasa (Kuliner & Katering Acara)\n" +
           "• AutoPro Detailing (Bengkel & Perawatan Mobil)\n" +
           "• Vona Bridal (Gaun Pengantin & Studio MUA)\n" +
-          "• The Wedding of Arya & Nabila (Undangan Digital)\n\n" +
-          "Semua template bisa dicoba langsung dan disesuaikan dengan warna serta logo brand Anda.",
+          "• The Wedding of Arya & Nabila (Undangan Digital Interaktif)",
         actions: [
+          {
+            label: "Kunjungi temantix.com",
+            icon: "fa-solid fa-arrow-up-right-from-square",
+            href: "https://temantix.com/",
+            isExternal: true,
+          },
           {
             label: "Jelajahi Katalog Template",
             icon: "fa-solid fa-layer-group",
