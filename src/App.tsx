@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import KinetraAIChat from "./KinetraAIChat";
 
 const WA_NUMBER = "6281234567890";
@@ -147,6 +147,65 @@ function Icon({ name, className = "size-5" }: { name: IconName; className?: stri
       {paths[name]}
     </svg>
   );
+}
+
+const HERO_TYPING_PHRASES = [
+  "Siap dalam 3 hari.",
+  "Banjir order WhatsApp.",
+  "Muncul di Google Maps.",
+  "Desain mobile-first & cepat.",
+  "100% tanpa ribet koding.",
+  "Mulai Rp 149rb/bulan.",
+];
+
+function useTypewriter(
+  phrases: string[],
+  typingSpeed = 75,
+  deletingSpeed = 40,
+  pauseDuration = 2200,
+) {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState(phrases[0] || "");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const currentPhrase = phrases[phraseIndex % phrases.length];
+
+    if (!isDeleting) {
+      if (displayText.length < currentPhrase.length) {
+        timer = setTimeout(() => {
+          setDisplayText(currentPhrase.slice(0, displayText.length + 1));
+        }, typingSpeed);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
+    } else {
+      if (displayText.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayText(currentPhrase.slice(0, displayText.length - 1));
+        }, deletingSpeed);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }, 250);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, pauseDuration]);
+
+  const nextPhrase = () => {
+    setIsDeleting(false);
+    const nextIdx = (phraseIndex + 1) % phrases.length;
+    setPhraseIndex(nextIdx);
+    setDisplayText(phrases[nextIdx]);
+  };
+
+  return { displayText, phraseIndex, nextPhrase };
 }
 
 const navLinks = [
@@ -907,6 +966,10 @@ const calcAddons: CalcAddonItem[] = [
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Typewriter Hero Animation
+  const { displayText: typedHeroText, nextPhrase: handleNextHeroPhrase } =
+    useTypewriter(HERO_TYPING_PHRASES);
+
   // Template Filter & Modal State
   const [activeCategory, setActiveCategory] = useState<string>("Semua");
   const [modalTemplate, setModalTemplate] = useState<TemplateItem | null>(null);
@@ -1064,10 +1127,19 @@ export default function App() {
                 <Icon name="spark" className="size-4 text-cyan-500" />
                 Partner Digital Bisnis Lokal & UMKM
               </div>
-              <h1 className="mt-7 max-w-[720px] text-[clamp(2.7rem,5.5vw,5rem)] font-black leading-[.99] tracking-[-0.06em] text-[#0b1d35]">
+              <h1 className="mt-7 max-w-[760px] text-[clamp(2.7rem,5.5vw,5rem)] font-black leading-[1.04] tracking-[-0.06em] text-[#0b1d35]">
                 Website bisnis, <span className="text-gradient">terima beres.</span>
                 <br />
-                Siap dalam 3 hari.
+                <span
+                  onClick={handleNextHeroPhrase}
+                  title="Klik untuk ganti kata"
+                  className="inline-flex items-center min-h-[1.12em] flex-wrap text-[#0875ef] cursor-pointer group select-none"
+                >
+                  <span className="group-hover:opacity-90 transition-opacity">
+                    {typedHeroText}
+                  </span>
+                  <span className="inline-block w-[3px] sm:w-[5px] h-[0.8em] bg-[#0875ef] ml-1.5 animate-pulse align-middle" />
+                </span>
               </h1>
               <p className="mt-7 max-w-[610px] text-[17px] leading-8 text-[#5d6d83] sm:text-[18px]">
                 Solusi website profesional terintegrasi Google Maps & WhatsApp, khusus untuk UMKM
@@ -2065,7 +2137,7 @@ export default function App() {
             </p>
             <div className="mt-6 flex gap-2.5">
               {[
-                ["instagram", "Instagram", "https://instagram.com"],
+                ["instagram", "Instagram", "https://www.instagram.com/kinetra.labs/"],
                 ["linkedin", "LinkedIn", "https://linkedin.com"],
                 ["globe", "Website", "https://kinetra.id"],
               ].map(([icon, label, href]) => (
