@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dapur Rasa - Katering Nusantara & Nasi Box Acara</title>
+  <link rel="icon" href="/favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            kuliner: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              900: '#7c2d12',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-amber-50/30 font-sans text-stone-800 antialiased selection:bg-kuliner-500 selection:text-white pt-10">
+
+  <!-- TOP DEMO BAR -->
+  <div class="fixed top-0 inset-x-0 z-50 bg-[#241208] text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-2 shadow-md">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-bold text-amber-200">Kinetra Demo:</span>
+      <span class="bg-kuliner-600 text-white font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Template Dapur Rasa</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="/#template" class="text-amber-200 hover:text-white transition text-xs flex items-center gap-1">
+        <span>&larr;</span> Kembali ke Kinetra
+      </a>
+      <a href="https://wa.me/6281234567890?text=Halo%20Kinetra%2C%20saya%20tertarik%20membuat%20website%20menggunakan%20Template%20Dapur%20Rasa." target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-3 py-1 rounded-full text-xs transition shadow flex items-center gap-1.5">
+        <span>Pakai Template Ini</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-10 z-40 bg-white/95 backdrop-blur-md border-b border-amber-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="size-11 rounded-2xl bg-gradient-to-tr from-kuliner-600 to-amber-500 grid place-items-center text-white shadow-md shadow-kuliner-600/20 font-black text-xl">
+          🍲
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-tight text-stone-900 block leading-tight">Dapur<span class="text-kuliner-600">Rasa</span></span>
+          <span class="text-[10px] font-semibold tracking-wider uppercase text-amber-700 block">Katering & Nasi Box Autentik</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-stone-600">
+        <a href="#menu" class="hover:text-kuliner-600 transition">Menu Favorit</a>
+        <a href="#paket" class="hover:text-kuliner-600 transition">Paket Prasmanan</a>
+        <a href="#cara-pesan" class="hover:text-kuliner-600 transition">Cara Pesan</a>
+        <a href="#testimoni" class="hover:text-kuliner-600 transition">Testimoni</a>
+      </nav>
+
+      <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Rasa%2C%20saya%20mau%20order%20katering%2Fnasi%20box%20untuk%20acara." target="_blank" class="bg-kuliner-600 hover:bg-kuliner-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md shadow-kuliner-600/20 transition flex items-center gap-1.5">
+        <span>Pesan via WA</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative bg-gradient-to-b from-amber-100/60 via-amber-50/40 to-white py-16 sm:py-24 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full bg-amber-100 border border-amber-200 px-3.5 py-1.5 text-xs font-bold text-amber-800 mb-6">
+          <span>🌟 100% Halal, Higienis & Tanpa Pengawet</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-black text-stone-900 tracking-tight leading-tight">
+          Cita Rasa Nusantara <span class="text-kuliner-600 underline decoration-amber-400/50">Istimewa</span> untuk Setiap Acara Berharga
+        </h1>
+        <p class="mt-5 text-base sm:text-lg text-stone-600 leading-relaxed">
+          Spesialis katering kantor, syukuran keluarga, aqiqah, hingga prasmanan pernikahan. Diolah dari rempah segar pilihan dengan garansi rasa lezat dan pengantaran tepat waktu.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4 items-center">
+          <a href="#menu" class="bg-kuliner-600 hover:bg-kuliner-700 text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg shadow-kuliner-600/25 transition text-sm">
+            Lihat Katalog Menu &rarr;
+          </a>
+          <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Rasa%2C%20saya%20minta%20pricelist%20katering." target="_blank" class="bg-white hover:bg-stone-50 text-stone-700 border border-amber-200 font-bold px-6 py-3.5 rounded-2xl transition text-sm">
+            Minta Pricelist PDF
+          </a>
+        </div>
+
+        <div class="mt-10 pt-8 border-t border-amber-200/80 grid grid-cols-3 gap-4">
+          <div>
+            <div class="text-2xl font-black text-stone-900">50.000+</div>
+            <div class="text-xs text-stone-500 font-semibold mt-0.5">Box Terkirim</div>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-stone-900">100%</div>
+            <div class="text-xs text-stone-500 font-semibold mt-0.5">Halal MUI</div>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-stone-900">Tepat Jam</div>
+            <div class="text-xs text-stone-500 font-semibold mt-0.5">Garansi Antar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Masakan Katering Nusantara" class="w-full h-[420px] object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl text-stone-800">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-bold text-sm">Paket Nasi Liwet Komplit Juara</p>
+                <p class="text-xs text-stone-500 mt-0.5">Mulai Rp 28.000 / porsi box</p>
+              </div>
+              <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">Best Seller</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATALOG MENU FAVORIT -->
+  <section id="menu" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-kuliner-600 block">Katalog Unggulan</span>
+        <h2 class="text-3xl font-black text-stone-900 mt-2">Menu Nasi Box Paling Laris</h2>
+        <p class="text-sm text-stone-600 mt-3 leading-relaxed">
+          Disajikan higienis dalam box ramah lingkungan dengan sendok, tisu, dan sambal sachet terpisah.
+        </p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Menu 1 -->
+        <div class="rounded-2xl border border-amber-100 bg-stone-50/50 overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=500&q=80" alt="Nasi Liwet" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h4 class="font-bold text-stone-900 text-base">Nasi Liwet Sunda</h4>
+              <p class="text-xs text-stone-500 mt-1">Ayam bakar bumbu rujak, tahu, tempe bacem, lalapan & sambal terasi.</p>
+            </div>
+          </div>
+          <div class="p-4 pt-0 flex justify-between items-center">
+            <span class="font-black text-kuliner-600 text-base">Rp 28.000</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Rasa%2C%20saya%20mau%20pesan%20Nasi%20Liwet%20Sunda." target="_blank" class="bg-kuliner-600 hover:bg-kuliner-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">Pesan</a>
+          </div>
+        </div>
+
+        <!-- Menu 2 -->
+        <div class="rounded-2xl border border-amber-100 bg-stone-50/50 overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=500&q=80" alt="Nasi Uduk Betawi" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h4 class="font-bold text-stone-900 text-base">Nasi Uduk Komplit</h4>
+              <p class="text-xs text-stone-500 mt-1">Semur daging sapi rempah, bihun goreng, telur balado & kerupuk udang.</p>
+            </div>
+          </div>
+          <div class="p-4 pt-0 flex justify-between items-center">
+            <span class="font-black text-kuliner-600 text-base">Rp 32.000</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Rasa%2C%20saya%20mau%20pesan%20Nasi%20Uduk%20Komplit." target="_blank" class="bg-kuliner-600 hover:bg-kuliner-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">Pesan</a>
+          </div>
+        </div>
+
+        <!-- Menu 3 -->
+        <div class="rounded-2xl border border-amber-100 bg-stone-50/50 overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80" alt="Nasi Padang Rendang" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h4 class="font-bold text-stone-900 text-base">Nasi Rendang Minang</h4>
+              <p class="text-xs text-stone-500 mt-1">Rendang sapi empuk racikan otentik Padang, daun singkong & sambal ijo.</p>
+            </div>
+          </div>
+          <div class="p-4 pt-0 flex justify-between items-center">
+            <span class="font-black text-kuliner-600 text-base">Rp 35.000</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Rasa%2C%20saya%20mau%20pesan%20Nasi%20Rendang." target="_blank" class="bg-kuliner-600 hover:bg-kuliner-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">Pesan</a>
+          </div>
+        </div>
+
+        <!-- Menu 4 -->
+        <div class="rounded-2xl border border-amber-100 bg-stone-50/50 overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=500&q=80" alt="Nasi Kuning Tumpeng Mini" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h4 class="font-bold text-stone-900 text-base">Tumpeng Mini Syukuran</h4>
+              <p class="text-xs text-stone-500 mt-1">Nasi kuning wangi pulen, ayam suwir, perkedel, abon & sambal goreng ati.</p>
+            </div>
+          </div>
+          <div class="p-4 pt-0 flex justify-between items-center">
+            <span class="font-black text-kuliner-600 text-base">Rp 38.000</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Rasa%2C%20saya%20mau%20pesan%20Tumpeng%20Mini." target="_blank" class="bg-kuliner-600 hover:bg-kuliner-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">Pesan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 text-white py-12 border-t border-stone-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-stone-400">
+      <div>
+        <span class="text-lg font-black text-white">Dapur<span class="text-kuliner-500">Rasa</span></span>
+        <p class="mt-1">Template Website Resto & Katering Kuliner oleh Kinetra Digital.</p>
+      </div>
+      <div>
+        © 2026 Dapur Rasa Demo. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

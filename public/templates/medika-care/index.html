@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medika Care Clinic & Layanan Medis Terpadu</title>
+  <link rel="icon" href="/favicon.svg">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            clinic: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased selection:bg-clinic-500 selection:text-white pt-10">
+
+  <!-- TOP DEMO BAR FOR VISITORS -->
+  <div class="fixed top-0 inset-x-0 z-50 bg-[#0c1f38] text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-2 shadow-md">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-bold text-slate-200">Kinetra Demo:</span>
+      <span class="bg-clinic-600 text-white font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Template Medika Care</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="/#template" class="text-slate-300 hover:text-white transition text-xs flex items-center gap-1">
+        <span>&larr;</span> Kembali ke Kinetra
+      </a>
+      <a href="https://wa.me/6281234567890?text=Halo%20Kinetra%2C%20saya%20tertarik%20membuat%20website%20menggunakan%20Template%20Medika%20Care." target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-3 py-1 rounded-full text-xs transition shadow flex items-center gap-1.5">
+        <span>Pakai Template Ini</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-10 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="size-11 rounded-xl bg-gradient-to-tr from-clinic-600 to-clinic-500 grid place-items-center text-white shadow-md shadow-clinic-500/20 font-black text-xl">
+          +
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-tight text-slate-900 block leading-tight">Medika<span class="text-clinic-600">Care</span></span>
+          <span class="text-[10px] font-semibold tracking-wider uppercase text-slate-400 block">Klinik & Laboratorium 24 Jam</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#layanan" class="hover:text-clinic-600 transition">Layanan</a>
+        <a href="#jadwal" class="hover:text-clinic-600 transition">Jadwal Dokter</a>
+        <a href="#fasilitas" class="hover:text-clinic-600 transition">Fasilitas</a>
+        <a href="#testimoni" class="hover:text-clinic-600 transition">Testimoni</a>
+        <a href="#lokasi" class="hover:text-clinic-600 transition">Lokasi & Kontak</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Medika%20Care%2C%20saya%20mau%20daftar%20antrean%20konsultasi%20dokter." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-clinic-600 hover:bg-clinic-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md shadow-clinic-600/20 transition">
+          <svg class="size-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+          Daftar Antrean WA
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-white via-clinic-50/50 to-slate-50 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full bg-clinic-100/80 border border-clinic-200/60 px-3.5 py-1.5 text-xs font-bold text-clinic-700 mb-6">
+          <span class="size-2 rounded-full bg-clinic-600"></span>
+          Klinik Pratama Terakreditasi Paripurna
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
+          Kesehatan Keluarga Anda Adalah <span class="text-clinic-600 underline decoration-clinic-500/30">Prioritas Utama Kami</span>
+        </h1>
+        <p class="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed">
+          Dapatkan pelayanan medis ramah, dokter spesialis berpengalaman, fasilitas modern, serta pendaftaran antrean instan tanpa harus antre lama di ruang tunggu.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4 items-center">
+          <a href="https://wa.me/6281234567890?text=Halo%20Medika%20Care%2C%20saya%20ingin%20konsultasi%20jadwal%20dokter." target="_blank" class="bg-clinic-600 hover:bg-clinic-700 text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg shadow-clinic-600/25 transition text-sm flex items-center gap-2">
+            Konsultasi Sekarang
+            <span>&rarr;</span>
+          </a>
+          <a href="#jadwal" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold px-6 py-3.5 rounded-2xl transition text-sm">
+            Lihat Jadwal Dokter
+          </a>
+        </div>
+
+        <div class="mt-10 pt-8 border-t border-slate-200/70 grid grid-cols-3 gap-6">
+          <div>
+            <div class="text-2xl font-black text-slate-900">15+</div>
+            <div class="text-xs text-slate-500 font-semibold mt-0.5">Dokter Ahli</div>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-slate-900">12.000+</div>
+            <div class="text-xs text-slate-500 font-semibold mt-0.5">Pasien Puas</div>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-slate-900">24 Jam</div>
+            <div class="text-xs text-slate-500 font-semibold mt-0.5">IGD & Lab</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=80" alt="Dokter Ramah Medika Care" class="w-full h-[420px] object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/30">
+            <div class="flex items-center gap-3">
+              <span class="size-3 rounded-full bg-emerald-400"></span>
+              <p class="text-xs font-bold">Dokter Jaga & Laboratorium Siap Melayani Hari Ini</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYANAN UNGGULAN -->
+  <section id="layanan" class="py-20 bg-white border-y border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-clinic-600 block">Pelayanan Terpadu</span>
+        <h2 class="text-3xl font-black text-slate-900 mt-2">Layanan Medis Lengkap & Terpercaya</h2>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+          Didukung peralatan medis berstandar internasional dan tim tenaga kesehatan yang profesional serta ramah.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Item 1 -->
+        <div class="p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-clinic-200 hover:shadow-lg transition">
+          <div class="size-12 rounded-xl bg-clinic-100 text-clinic-600 grid place-items-center font-bold text-xl mb-4">🩺</div>
+          <h3 class="text-lg font-bold text-slate-900">Poli Umum & Anak</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Pemeriksaan kesehatan menyeluruh, imunisasi balita, dan konsultasi tumbuh kembang anak.</p>
+        </div>
+        <!-- Item 2 -->
+        <div class="p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-clinic-200 hover:shadow-lg transition">
+          <div class="size-12 rounded-xl bg-emerald-100 text-emerald-600 grid place-items-center font-bold text-xl mb-4">🦷</div>
+          <h3 class="text-lg font-bold text-slate-900">Klinik Gigi & Mulut</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Scaling karang gigi, penambalan estetika, cabut gigi tanpa rasa sakit, dan pasang behel.</p>
+        </div>
+        <!-- Item 3 -->
+        <div class="p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-clinic-200 hover:shadow-lg transition">
+          <div class="size-12 rounded-xl bg-indigo-100 text-indigo-600 grid place-items-center font-bold text-xl mb-4">🔬</div>
+          <h3 class="text-lg font-bold text-slate-900">Laboratorium Darah</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Cek gula darah, kolesterol, fungsi hati, asam urat, urine lengkap dengan hasil cepat dan akurat.</p>
+        </div>
+        <!-- Item 4 -->
+        <div class="p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-clinic-200 hover:shadow-lg transition">
+          <div class="size-12 rounded-xl bg-rose-100 text-rose-600 grid place-items-center font-bold text-xl mb-4">❤️</div>
+          <h3 class="text-lg font-bold text-slate-900">Medical Check-Up (MCU)</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Paket screening kesehatan untuk calon karyawan, pranikah, dan pemeriksaan rutin tahunan.</p>
+        </div>
+        <!-- Item 5 -->
+        <div class="p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-clinic-200 hover:shadow-lg transition">
+          <div class="size-12 rounded-xl bg-amber-100 text-amber-600 grid place-items-center font-bold text-xl mb-4">💉</div>
+          <h3 class="text-lg font-bold text-slate-900">Vaksinasi & Imunisasi</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Vaksin flu, hepatitis, HPV kanker serviks, serta vaksin umroh dan perjalanan internasional.</p>
+        </div>
+        <!-- Item 6 -->
+        <div class="p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-clinic-200 hover:shadow-lg transition">
+          <div class="size-12 rounded-xl bg-teal-100 text-teal-600 grid place-items-center font-bold text-xl mb-4">🚑</div>
+          <h3 class="text-lg font-bold text-slate-900">IGD 24 Jam & Farmasi</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Tindakan darurat medis segera dan apotek terintegrasi dengan ketersediaan obat lengkap resmi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JADWAL DOKTER -->
+  <section id="jadwal" class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-clinic-600 block">Jadwal Praktek</span>
+          <h2 class="text-3xl font-black text-slate-900 mt-2">Daftar Dokter Spesialis</h2>
+        </div>
+        <p class="text-xs text-slate-500 max-w-sm">Pilih dokter yang sesuai dan booking nomor antrean langsung dari WhatsApp Anda.</p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=150&q=80" alt="dr. Amanda" class="size-14 rounded-full object-cover">
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">dr. Amanda Sp.A</h4>
+                <p class="text-xs text-clinic-600 font-semibold">Spesialis Anak</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
+              <p>📅 <strong>Senin - Kamis:</strong> 16:00 - 20:00 WIB</p>
+              <p>📅 <strong>Sabtu:</strong> 09:00 - 13:00 WIB</p>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20daftar%20antrean%20ke%20dr.%20Amanda%20Sp.A." target="_blank" class="mt-5 text-center text-xs font-bold text-clinic-600 border border-clinic-200 bg-clinic-50/70 hover:bg-clinic-600 hover:text-white py-2 rounded-xl transition">
+            Booking dr. Amanda &rarr;
+          </a>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&q=80" alt="drg. Hendra" class="size-14 rounded-full object-cover">
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">drg. Hendra Pratama</h4>
+                <p class="text-xs text-clinic-600 font-semibold">Dokter Gigi Umum & Estetika</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
+              <p>📅 <strong>Senin - Jumat:</strong> 09:00 - 15:00 WIB</p>
+              <p>📅 <strong>Minggu:</strong> Dengan Perjanjian</p>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20daftar%20antrean%20ke%20drg.%20Hendra%20Pratama." target="_blank" class="mt-5 text-center text-xs font-bold text-clinic-600 border border-clinic-200 bg-clinic-50/70 hover:bg-clinic-600 hover:text-white py-2 rounded-xl transition">
+            Booking drg. Hendra &rarr;
+          </a>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1594824813590-7892542a6c8e?auto=format&fit=crop&w=150&q=80" alt="dr. Budi" class="size-14 rounded-full object-cover">
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">dr. Budi Santoso Sp.PD</h4>
+                <p class="text-xs text-clinic-600 font-semibold">Spesialis Penyakit Dalam</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
+              <p>📅 <strong>Selasa & Kamis:</strong> 17:00 - 21:00 WIB</p>
+              <p>📅 <strong>Sabtu:</strong> 14:00 - 18:00 WIB</p>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20daftar%20antrean%20ke%20dr.%20Budi%20Santoso%20Sp.PD." target="_blank" class="mt-5 text-center text-xs font-bold text-clinic-600 border border-clinic-200 bg-clinic-50/70 hover:bg-clinic-600 hover:text-white py-2 rounded-xl transition">
+            Booking dr. Budi &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOKASI & KONTAK -->
+  <section id="lokasi" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-xs font-extrabold uppercase tracking-widest text-clinic-600 block">Kunjungi Klinik Kami</span>
+        <h2 class="text-3xl font-black text-slate-900 mt-2">Lokasi Strategis & Akses Mudah</h2>
+        <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+          Tersedia area parkir mobil & motor yang luas, ramah disabilitas, dan dekat dengan pusat kota.
+        </p>
+
+        <div class="mt-8 space-y-4 text-xs text-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="text-clinic-600 text-base font-bold">📍</span>
+            <div>
+              <strong class="text-slate-900 block text-sm">Alamat Lengkap:</strong>
+              Jl. Kesehatan Sejahtera No. 88, Kota Harapan Sehat
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-clinic-600 text-base font-bold">⏰</span>
+            <div>
+              <strong class="text-slate-900 block text-sm">Jam Operasional:</strong>
+              Poli Spesialis: 08.00 - 21.00 WIB | IGD & Laboratorium: 24 Jam Nonstop
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-clinic-600 text-base font-bold">📞</span>
+            <div>
+              <strong class="text-slate-900 block text-sm">Hotline & WhatsApp:</strong>
+              (021) 555-8899 / WhatsApp: 0812-3456-7890
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-clinic-600 text-white font-bold px-5 py-3 rounded-xl text-xs transition">
+            Buka Petunjuk Arah Google Maps &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-lg bg-slate-100 h-80 flex items-center justify-center text-slate-400 text-xs">
+        <div class="text-center p-6">
+          <div class="size-12 rounded-full bg-slate-200 text-slate-600 grid place-items-center mx-auto mb-2 font-bold text-lg">🗺️</div>
+          <p class="font-bold text-slate-800 text-sm">Simulasi Peta Google Maps</p>
+          <p class="mt-1">Jl. Kesehatan Sejahtera No. 88</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-400">
+      <div>
+        <span class="text-lg font-black text-white">Medika<span class="text-clinic-500">Care</span></span>
+        <p class="mt-1">Template Website Klinik Kesehatan oleh Kinetra Digital.</p>
+      </div>
+      <div>
+        © 2026 Medika Care Demo. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

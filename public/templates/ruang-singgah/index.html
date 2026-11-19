@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruang Singgah - Kos Eksklusif & Guest House Harian</title>
+  <link rel="icon" href="/favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            prop: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              900: '#134e4a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased selection:bg-prop-500 selection:text-white pt-10">
+
+  <!-- TOP DEMO BAR -->
+  <div class="fixed top-0 inset-x-0 z-50 bg-[#122822] text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-2 shadow-md">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-bold text-stone-200">Kinetra Demo:</span>
+      <span class="bg-prop-600 text-white font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Template Ruang Singgah</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="/#template" class="text-stone-300 hover:text-white transition text-xs flex items-center gap-1">
+        <span>&larr;</span> Kembali ke Kinetra
+      </a>
+      <a href="https://wa.me/6281234567890?text=Halo%20Kinetra%2C%20saya%20tertarik%20membuat%20website%20menggunakan%20Template%20Ruang%20Singgah." target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-3 py-1 rounded-full text-xs transition shadow flex items-center gap-1.5">
+        <span>Pakai Template Ini</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-10 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="size-10 rounded-xl bg-gradient-to-tr from-prop-700 to-prop-500 grid place-items-center text-white shadow-md shadow-prop-600/20 font-black text-lg">
+          🌿
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-tight text-stone-900 block leading-tight">Ruang<span class="text-prop-600">Singgah</span></span>
+          <span class="text-[10px] font-semibold tracking-wider uppercase text-stone-400 block">Kos Eksklusif & Guest House</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-stone-600">
+        <a href="#kamar" class="hover:text-prop-600 transition">Pilihan Kamar</a>
+        <a href="#fasilitas" class="hover:text-prop-600 transition">Fasilitas</a>
+        <a href="#galeri" class="hover:text-prop-600 transition">Galeri</a>
+        <a href="#lokasi" class="hover:text-prop-600 transition">Lokasi Strategis</a>
+      </nav>
+
+      <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ruang%20Singgah%2C%20apakah%20masih%20ada%20kamar%20kosong%20bulan%20ini%3F" target="_blank" class="bg-prop-600 hover:bg-prop-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md shadow-prop-600/20 transition flex items-center gap-1.5">
+        <span>Cek Ketersediaan WA</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative bg-gradient-to-b from-stone-100 to-stone-50 py-16 sm:py-24 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full bg-prop-100 border border-prop-200 px-3.5 py-1.5 text-xs font-bold text-prop-700 mb-6">
+          <span>⭐ 4.9/5 dari 300+ Penghuni Puas</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-black text-stone-900 tracking-tight leading-tight">
+          Hunian Nyaman, Estetik & <span class="text-prop-600 underline decoration-prop-400/40">Bebas Ribet</span> di Pusat Kota
+        </h1>
+        <p class="mt-5 text-base sm:text-lg text-stone-600 leading-relaxed">
+          Dirancang untuk profesional muda dan mahasiswa yang menginginkan lingkungan bersih, aman 24 jam dengan fasilitas sekelas hotel berbintang.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4 items-center">
+          <a href="https://wa.me/6281234567890?text=Halo%20Ruang%20Singgah%2C%20saya%20mau%20survei%20kamar." target="_blank" class="bg-prop-600 hover:bg-prop-700 text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg shadow-prop-600/25 transition text-sm">
+            Jadwalkan Survei Kamar &rarr;
+          </a>
+          <a href="#kamar" class="bg-white hover:bg-stone-100 text-stone-700 border border-stone-300 font-bold px-6 py-3.5 rounded-2xl transition text-sm">
+            Lihat Tipe Kamar
+          </a>
+        </div>
+
+        <div class="mt-10 pt-8 border-t border-stone-200 grid grid-cols-3 gap-4">
+          <div>
+            <div class="text-xl sm:text-2xl font-black text-stone-900">100 Mbps</div>
+            <div class="text-xs text-stone-500 font-semibold mt-0.5">WiFi Cepat</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-black text-stone-900">24 Jam</div>
+            <div class="text-xs text-stone-500 font-semibold mt-0.5">Akses Smart Lock</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-black text-stone-900">Water Heater</div>
+            <div class="text-xs text-stone-500 font-semibold mt-0.5">Air Panas Siap</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+          <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=900&q=80" alt="Kamar Ruang Singgah" class="w-full h-[420px] object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl text-stone-800">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-bold text-sm">Tipe Deluxe King - Balkon Pribadi</p>
+                <p class="text-xs text-stone-500 mt-0.5">Mulai Rp 2.200.000 / bulan</p>
+              </div>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase">Sisa 2 Kamar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILIHAN KAMAR -->
+  <section id="kamar" class="py-20 bg-white border-y border-stone-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-prop-600 block">Pilihan Kamar</span>
+        <h2 class="text-3xl font-black text-stone-900 mt-2">Pilih Tipe Kamar Sesuai Kebutuhan Anda</h2>
+        <p class="text-sm text-stone-600 mt-3 leading-relaxed">
+          Semua kamar sudah fully furnished lengkap dengan kasur springbed hotel, lemari baju, meja kerja, AC, dan kamar mandi dalam.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Kamar 1 -->
+        <div class="rounded-3xl border border-stone-200 bg-stone-50 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl transition duration-300">
+          <div>
+            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80" alt="Superior Room" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-prop-600 bg-prop-100 px-2 py-0.5 rounded">Tipe Standard</span>
+              <h3 class="text-xl font-bold text-stone-900 mt-2">Superior Twin Room</h3>
+              <p class="text-xs text-stone-600 mt-2">Kamar kompak minimalis dengan pencahayaan alami yang hangat.</p>
+
+              <div class="mt-4 pt-4 border-t border-stone-200/80 space-y-1.5 text-xs text-stone-600">
+                <div class="flex items-center gap-2">✓ Kasur Single 120x200cm</div>
+                <div class="flex items-center gap-2">✓ AC 1/2 PK Hemat Energi</div>
+                <div class="flex items-center gap-2">✓ Kamar Mandi Dalam + Shower</div>
+                <div class="flex items-center gap-2">✓ Meja Kerja & Stop Kontak</div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <div class="mb-4">
+              <span class="text-2xl font-black text-stone-900">Rp 1.800.000</span>
+              <span class="text-xs text-stone-500"> / bulan</span>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ruang%20Singgah%2C%20saya%20mau%20pesan%20Kamar%20Superior%20Twin." target="_blank" class="block w-full text-center bg-stone-900 hover:bg-prop-600 text-white font-bold py-3 rounded-xl text-xs transition">
+              Booking Kamar Ini
+            </a>
+          </div>
+        </div>
+
+        <!-- Kamar 2 -->
+        <div class="rounded-3xl border-2 border-prop-500 bg-white overflow-hidden flex flex-col justify-between shadow-xl relative">
+          <div class="absolute top-4 right-4 bg-prop-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow">
+            Paling Favorit
+          </div>
+          <div>
+            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80" alt="Deluxe Room" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-prop-600 bg-prop-100 px-2 py-0.5 rounded">Tipe Luas & Nyaman</span>
+              <h3 class="text-xl font-bold text-stone-900 mt-2">Deluxe King with Balcony</h3>
+              <p class="text-xs text-stone-600 mt-2">Kamar luas dengan balkon pribadi, pemandangan kota, dan water heater.</p>
+
+              <div class="mt-4 pt-4 border-t border-stone-200/80 space-y-1.5 text-xs text-stone-600">
+                <div class="flex items-center gap-2">✓ Kasur King Size 180x200cm</div>
+                <div class="flex items-center gap-2">✓ Smart TV 43 Inch + Netflix</div>
+                <div class="flex items-center gap-2">✓ Water Heater Air Panas</div>
+                <div class="flex items-center gap-2">✓ Balkon Pribadi & Kursi Santai</div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <div class="mb-4">
+              <span class="text-2xl font-black text-prop-600">Rp 2.200.000</span>
+              <span class="text-xs text-stone-500"> / bulan</span>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ruang%20Singgah%2C%20saya%20mau%20pesan%20Kamar%20Deluxe%20King." target="_blank" class="block w-full text-center bg-prop-600 hover:bg-prop-700 text-white font-bold py-3 rounded-xl text-xs transition shadow-md shadow-prop-600/30">
+              Booking Kamar Ini
+            </a>
+          </div>
+        </div>
+
+        <!-- Kamar 3 -->
+        <div class="rounded-3xl border border-stone-200 bg-stone-50 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl transition duration-300">
+          <div>
+            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80" alt="Suite Studio" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-prop-600 bg-prop-100 px-2 py-0.5 rounded">Tipe Apartemen Studio</span>
+              <h3 class="text-xl font-bold text-stone-900 mt-2">Executive Studio Suite</h3>
+              <p class="text-xs text-stone-600 mt-2">Dilengkapi mini pantry pribadi, kulkas 1 pintu, dan area sofa bersantai.</p>
+
+              <div class="mt-4 pt-4 border-t border-stone-200/80 space-y-1.5 text-xs text-stone-600">
+                <div class="flex items-center gap-2">✓ Kasur King Size Premium</div>
+                <div class="flex items-center gap-2">✓ Mini Kitchenette & Kulkas</div>
+                <div class="flex items-center gap-2">✓ Sofa & Meja Tamu</div>
+                <div class="flex items-center gap-2">✓ Parkir Mobil Prioritas</div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <div class="mb-4">
+              <span class="text-2xl font-black text-stone-900">Rp 3.000.000</span>
+              <span class="text-xs text-stone-500"> / bulan</span>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ruang%20Singgah%2C%20saya%20mau%20pesan%20Executive%20Studio." target="_blank" class="block w-full text-center bg-stone-900 hover:bg-prop-600 text-white font-bold py-3 rounded-xl text-xs transition">
+              Booking Kamar Ini
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASILITAS BERSAMA -->
+  <section id="fasilitas" class="py-20 bg-stone-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-prop-600 block">Fasilitas Lengkap</span>
+        <h2 class="text-3xl font-black text-stone-900 mt-2">Fasilitas Bersama Rasa Co-Living</h2>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 text-center">
+          <div class="text-3xl mb-3">🍳</div>
+          <h4 class="font-bold text-stone-900 text-sm">Dapur Bersama</h4>
+          <p class="text-xs text-stone-500 mt-1">Kompor induksi, microwave, dispenser air minum gratis.</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 text-center">
+          <div class="text-3xl mb-3">🧺</div>
+          <h4 class="font-bold text-stone-900 text-sm">Mesin Cuci & Jemuran</h4>
+          <p class="text-xs text-stone-500 mt-1">Mesin cuci otomatis dan area jemuran luas bebas hujan.</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 text-center">
+          <div class="text-3xl mb-3">☕</div>
+          <h4 class="font-bold text-stone-900 text-sm">Rooftop Lounge</h4>
+          <p class="text-xs text-stone-500 mt-1">Tempat kerja santai (WFC) dengan colokan dan angin sejuk.</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 text-center">
+          <div class="text-3xl mb-3">🛵</div>
+          <h4 class="font-bold text-stone-900 text-sm">Parkir Mobil & Motor</h4>
+          <p class="text-xs text-stone-500 mt-1">Akses gerbang otomatis dan terpantau CCTV 24 jam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 text-white py-12 border-t border-stone-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-stone-400">
+      <div>
+        <span class="text-lg font-black text-white">Ruang<span class="text-prop-500">Singgah</span></span>
+        <p class="mt-1">Template Website Kos & Rental Properti oleh Kinetra Digital.</p>
+      </div>
+      <div>
+        © 2026 Ruang Singgah Demo. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
