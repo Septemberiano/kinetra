@@ -961,9 +961,9 @@ export default function App() {
 
     const lines = [
       "Halo Kinetra, saya ingin Kunci Promo & Konsultasi Paket Website Berlangganan:",
-      `📌 Paket Pilihan: Paket ${currentCalcPkg.name} (${formatRupiah(currentCalcPkg.price)} / bln)`,
-      fullAddonsText ? `➕ Fitur Tambahan:\n${fullAddonsText}` : "➕ Fitur Tambahan: Standar Paket",
-      "💰 Rincian Pembayaran (Promo Penetrasi 3 Bulan Pertama):",
+      `* Paket Pilihan: Paket ${currentCalcPkg.name} (${formatRupiah(currentCalcPkg.price)} / bln)`,
+      fullAddonsText ? `* Fitur Tambahan:\n${fullAddonsText}` : "* Fitur Tambahan: Standar Paket",
+      "Rincian Pembayaran (Promo Penetrasi 3 Bulan Pertama):",
       `• Total Pembayaran Awal (3 Bulan Pertama): ${formatRupiah(totalPembayaranAwal)}`,
       `• Tagihan Bulan ke-4 dan seterusnya: ${formatRupiah(totalBiayaBulanan)} / bln`,
       "",
@@ -1221,9 +1221,10 @@ export default function App() {
                         {item.features.slice(0, 3).map((f) => (
                           <span
                             key={f}
-                            className="rounded-md border border-slate-100 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-500"
+                            className="rounded-md border border-slate-100 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-500 flex items-center gap-1"
                           >
-                            ✓ {f}
+                            <i className="fa-solid fa-check text-emerald-500 text-[9px]" />
+                            <span>{f}</span>
                           </span>
                         ))}
                       </div>
@@ -1450,8 +1451,8 @@ export default function App() {
                             <div className="flex justify-between items-center">
                               <span className="font-extrabold text-sm text-[#0b1d35]">{pkg.name}</span>
                               {isSelected && (
-                                <span className="size-4 rounded-full bg-[#0875ef] grid place-items-center text-white text-[10px]">
-                                  ✓
+                                <span className="size-4 rounded-full bg-[#0875ef] grid place-items-center text-white text-[9px]">
+                                  <i className="fa-solid fa-check" />
                                 </span>
                               )}
                             </div>
@@ -1538,7 +1539,7 @@ export default function App() {
                                   : "border-slate-300 bg-white"
                               }`}
                             >
-                              {isChecked && "✓"}
+                              {isChecked && <i className="fa-solid fa-check text-[10px]" />}
                             </span>
                           </div>
                         );
@@ -1863,7 +1864,7 @@ export default function App() {
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    <span>💻</span>
+                    <i className="fa-solid fa-laptop text-xs" />
                     <span className="hidden sm:inline">Layar Komputer</span>
                   </button>
                   <button
@@ -1875,7 +1876,7 @@ export default function App() {
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    <span>📱</span>
+                    <i className="fa-solid fa-mobile-screen text-xs" />
                     <span className="hidden sm:inline">Layar Ponsel</span>
                   </button>
                 </div>
@@ -1944,9 +1945,10 @@ export default function App() {
                 {modalTemplate.features.map((f) => (
                   <span
                     key={f}
-                    className="rounded-md border border-slate-100 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+                    className="rounded-md border border-slate-100 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600 flex items-center gap-1.5"
                   >
-                    ✓ {f}
+                    <i className="fa-solid fa-check text-emerald-600 text-[10px]" />
+                    <span>{f}</span>
                   </span>
                 ))}
               </div>
@@ -2003,7 +2005,7 @@ export default function App() {
             {/* Chat Body */}
             <div className="p-4 bg-slate-50 space-y-3">
               <div className="rounded-2xl rounded-tl-sm bg-white p-3 text-xs leading-relaxed text-slate-700 shadow-sm border border-slate-100">
-                Halo! 👋 Ada yang bisa kami bantu seputar pembuatan website untuk bisnis Anda hari ini?
+                Halo, selamat datang di Kinetra! Ada yang bisa kami bantu seputar pembuatan website untuk bisnis Anda hari ini?
               </div>
 
               {/* Quick Prompt Chips */}
