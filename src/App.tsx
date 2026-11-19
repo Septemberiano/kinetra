@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import KinetraAIChat from "./KinetraAIChat";
 
 const WA_NUMBER = "6281234567890";
 const WA_BASE_URL = `https://wa.me/${WA_NUMBER}`;
@@ -153,6 +154,7 @@ const navLinks = [
   ["Katalog Template", "#template"],
   ["Portofolio", "#portofolio"],
   ["Harga & Kalkulator", "#harga"],
+  ["Kemitraan", "#kemitraan"],
   ["FAQ", "#faq"],
 ];
 
@@ -805,6 +807,16 @@ const faqs = [
     answer:
       "100% Mobile-First! Lebih dari 80% calon pembeli Anda akan membuka website dari ponsel. Seluruh website yang kami buat dioptimasi agar memuat sangat cepat (kurang dari 2 detik) dan responsif di semua ukuran layar.",
   },
+  {
+    question: "Apakah Kinetra juga menerima pembuatan Web Application atau sistem kustom?",
+    answer:
+      "Tentu saja! Di luar paket website standar, kami berpengalaman membangun Web Application kustom seperti Dashboard Admin, Sistem Kasir/POS, Portal Pelanggan & Karyawan, Sistem Booking Kompleks, hingga integrasi database dan Payment Gateway. Hubungi kami untuk konsultasi spesifikasi teknis bisnis Anda.",
+  },
+  {
+    question: "Bagaimana cara kerja program kemitraan pembuatan undangan digital & website?",
+    answer:
+      "Program kemitraan Kinetra terbuka untuk Wedding Organizer (WO), Event Organizer (EO), fotografer, percetakan, dan agensi kreatif. Tersedia sistem komisi menarik hingga 30% maupun sistem white-label (memakai nama brand Anda). Seluruh urusan teknis dan pengerjaan ditangani penuh oleh tim Kinetra.",
+  },
 ];
 
 interface CalcPackageItem {
@@ -893,10 +905,6 @@ export default function App() {
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Floating Chat Widget State
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatMessage, setChatMessage] = useState("");
-
   const currentCalcPkg = calcPackages[calcPackage];
   const isDomainUpgradeFree = currentCalcPkg.id !== "starter";
 
@@ -971,13 +979,6 @@ export default function App() {
     ];
 
     return `${WA_BASE_URL}?text=${encodeURIComponent(lines.join("\n"))}`;
-  };
-
-  const handleSendChat = (presetText?: string) => {
-    const textToSend = presetText || chatMessage || "Halo Kinetra, saya mau tanya paket website.";
-    window.open(`${WA_BASE_URL}?text=${encodeURIComponent(textToSend)}`, "_blank");
-    setChatOpen(false);
-    setChatMessage("");
   };
 
   return (
@@ -1238,8 +1239,8 @@ export default function App() {
                         rel="noreferrer"
                         className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-blue-50 text-[#0870e8] border border-blue-200 text-xs font-bold transition hover:bg-[#0870e8] hover:text-white"
                       >
-                        <Icon name="arrow" className="size-3.5 -rotate-45" />
-                        Buka Demo ↗
+                        <i className="fa-solid fa-arrow-up-right-from-square text-[11px]" />
+                        Buka Demo
                       </a>
                       <button
                         type="button"
@@ -1387,6 +1388,55 @@ export default function App() {
                   </div>
                 </article>
               ))}
+            </div>
+
+            {/* Custom Web App & Enterprise Solutions Card */}
+            <div className="mt-8 rounded-3xl border border-blue-900/40 bg-gradient-to-r from-[#0b1d35] via-[#102a4e] to-[#0a336c] p-7 sm:p-9 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 rounded-full bg-cyan-500/20 border border-cyan-400/40 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-cyan-300">
+                  <i className="fa-solid fa-code text-cyan-300 text-xs" />
+                  Paket Custom &amp; Web Application
+                </div>
+                <h3 className="mt-3.5 text-2xl sm:text-3xl font-black text-white leading-tight">
+                  Punya Kebutuhan Sistem Khusus atau Web Application?
+                </h3>
+                <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Selain website profil &amp; landing page, tim Kinetra berpengalaman membangun aplikasi web custom: Dashboard Admin, Sistem Kasir/POS, Portal Karyawan &amp; Pelanggan, Sistem Reservasi Kustom, hingga SaaS terintegrasi dengan Payment Gateway (QRIS, VA Bank) &amp; Notifikasi WhatsApp Otomatis.
+                </p>
+                <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                  <div className="flex items-center gap-2 text-slate-200">
+                    <i className="fa-solid fa-database text-cyan-400 text-xs" />
+                    <span>Database &amp; API Kustom</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-200">
+                    <i className="fa-solid fa-users-gear text-cyan-400 text-xs" />
+                    <span>Multi-Role Management</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-200">
+                    <i className="fa-solid fa-credit-card text-cyan-400 text-xs" />
+                    <span>Payment &amp; Notif WA</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-200">
+                    <i className="fa-solid fa-shield-halved text-cyan-400 text-xs" />
+                    <span>Garansi &amp; Maintenance</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto">
+                <a
+                  href={`${WA_BASE_URL}?text=Halo%20Kinetra%2C%20saya%20ingin%20konsultasi%20pembuatan%20Web%20Application%20%2F%20Sistem%20Custom%20untuk%20kebutuhan%20bisnis%20saya.`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-black px-6 py-3 text-xs sm:text-sm shadow-lg shadow-cyan-500/20 transition text-center"
+                >
+                  <i className="fa-brands fa-whatsapp text-base" />
+                  Konsultasikan Web App Anda
+                </a>
+                <span className="text-[11px] text-center text-slate-400">
+                  Estimasi transparan &amp; NDA terjamin
+                </span>
+              </div>
             </div>
 
             {/* INTERACTIVE PRICING CALCULATOR */}
@@ -1668,6 +1718,215 @@ export default function App() {
           </div>
         </section>
 
+        {/* KEMITRAAN & JASA UNDANGAN DIGITAL */}
+        <section
+          id="kemitraan"
+          className="scroll-mt-16 bg-gradient-to-b from-white via-[#f6f9fc] to-white py-24 sm:py-32 border-t border-slate-100"
+        >
+          <div className="page-width">
+            <SectionHeader
+              eyebrow="Layanan Spesial & Kemitraan"
+              title="Jasa Undangan Digital & Peluang Kemitraan Vendor"
+              description="Solusi undangan online interaktif masa kini untuk calon pengantin dan panitia event, serta program kemitraan resmi dengan sistem komisi menguntungkan untuk WO, EO, fotografer, dan percetakan."
+            />
+
+            {/* 2-Column Split: Undangan Digital & Program Kemitraan */}
+            <div className="mt-14 grid gap-8 lg:grid-cols-2 items-stretch">
+              {/* Pillar 1: Jasa Pembuatan Undangan Digital */}
+              <div className="relative rounded-[28px] border border-pink-100 bg-white p-7 sm:p-9 shadow-[0_20px_50px_rgba(244,114,182,.08)] flex flex-col justify-between overflow-hidden">
+                <div className="absolute top-0 right-0 w-44 h-44 bg-gradient-to-bl from-pink-100/70 to-transparent rounded-bl-full pointer-events-none" />
+
+                <div>
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-pink-50 border border-pink-200 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-pink-700">
+                      <i className="fa-solid fa-heart text-pink-500 text-xs" />
+                      Undangan Online Interaktif
+                    </span>
+                    <span className="text-[11px] font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      Aktif Selamanya
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-black text-slate-900 tracking-tight sm:text-3xl">
+                    Undangan Digital Elegan, Praktis &amp; Ramah Budget
+                  </h3>
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Sebarkan kabar bahagia ke ribuan keluarga dan teman tanpa repot dan tanpa batas biaya cetak fisik. Tampilan responsif di semua ponsel dengan visual sinematik, musik latar romantis, dan navigasi lokasi akurat.
+                  </p>
+
+                  {/* Feature highlights grid */}
+                  <div className="mt-6 grid gap-2.5 sm:grid-cols-2 text-xs text-slate-700">
+                    <div className="flex items-start gap-2.5 rounded-xl bg-slate-50 p-2.5 border border-slate-100">
+                      <span className="grid size-6 place-items-center rounded-lg bg-pink-100 text-pink-600 shrink-0">
+                        <i className="fa-solid fa-envelope-open-text text-xs" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold">RSVP &amp; Buku Tamu</strong>
+                        <span className="text-[11px] text-slate-500">Konfirmasi kehadiran via WA otomatis</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5 rounded-xl bg-slate-50 p-2.5 border border-slate-100">
+                      <span className="grid size-6 place-items-center rounded-lg bg-pink-100 text-pink-600 shrink-0">
+                        <i className="fa-solid fa-gift text-xs" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold">Amplop Digital &amp; QRIS</strong>
+                        <span className="text-[11px] text-slate-500">Kirim kado cashless ke rekening/e-wallet</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5 rounded-xl bg-slate-50 p-2.5 border border-slate-100">
+                      <span className="grid size-6 place-items-center rounded-lg bg-pink-100 text-pink-600 shrink-0">
+                        <i className="fa-solid fa-stopwatch text-xs" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold">Countdown Timer Acara</strong>
+                        <span className="text-[11px] text-slate-500">Pengingat kalender otomatis hari H</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5 rounded-xl bg-slate-50 p-2.5 border border-slate-100">
+                      <span className="grid size-6 place-items-center rounded-lg bg-pink-100 text-pink-600 shrink-0">
+                        <i className="fa-solid fa-map-location-dot text-xs" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold">Peta Lokasi Google Maps</strong>
+                        <span className="text-[11px] text-slate-500">Petunjuk rute akurat tanpa tersesat</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5 rounded-xl bg-slate-50 p-2.5 border border-slate-100">
+                      <span className="grid size-6 place-items-center rounded-lg bg-pink-100 text-pink-600 shrink-0">
+                        <i className="fa-solid fa-images text-xs" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold">Galeri Foto &amp; Video</strong>
+                        <span className="text-[11px] text-slate-500">Album prewedding sinematik tajam</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5 rounded-xl bg-slate-50 p-2.5 border border-slate-100">
+                      <span className="grid size-6 place-items-center rounded-lg bg-pink-100 text-pink-600 shrink-0">
+                        <i className="fa-solid fa-id-badge text-xs" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold">Nama Tamu Tak Terbatas</strong>
+                        <span className="text-[11px] text-slate-500">Bebas ganti ribuan nama penerima</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Investasi Mulai Dari</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-2xl font-black text-slate-900">Rp 99.000</span>
+                      <span className="text-xs font-semibold text-slate-400">/ undangan acara</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+                    <a
+                      href="/templates/undangan-digital/index.html"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full sm:w-auto inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-pink-200 bg-pink-50 hover:bg-pink-100 text-pink-700 font-bold px-4 py-2.5 text-xs transition text-center"
+                    >
+                      <i className="fa-solid fa-eye text-xs text-pink-600" />
+                      Lihat Demo
+                    </a>
+                    <a
+                      href={`${WA_BASE_URL}?text=Halo%20Kinetra%2C%20saya%20ingin%20pesan%20Jasa%20Pembuatan%20Undangan%20Digital%20untuk%20acara%20saya.`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full sm:w-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-bold px-5 py-2.5 text-xs shadow-md shadow-pink-500/20 transition text-center"
+                    >
+                      <i className="fa-brands fa-whatsapp text-sm" />
+                      Pesan Undangan Digital
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pillar 2: Program Kemitraan & Reseller */}
+              <div className="relative rounded-[28px] border border-blue-100 bg-white p-7 sm:p-9 shadow-[0_20px_50px_rgba(8,112,232,.08)] flex flex-col justify-between overflow-hidden">
+                <div className="absolute top-0 right-0 w-44 h-44 bg-gradient-to-bl from-blue-100/70 to-transparent rounded-bl-full pointer-events-none" />
+
+                <div>
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-blue-700">
+                      <i className="fa-solid fa-handshake text-blue-600 text-xs" />
+                      Program Kemitraan Resmi
+                    </span>
+                    <span className="text-[11px] font-extrabold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
+                      Komisi s/d 30%
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-black text-slate-900 tracking-tight sm:text-3xl">
+                    Bermitra dengan Kinetra, Tambah Penghasilan Bisnis Anda
+                  </h3>
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Khusus untuk <strong>Wedding Organizer (WO), Event Organizer (EO), Fotografer, MUA, Percetakan, Desainer, dan Agensi</strong> di seluruh Indonesia. Hadirkan nilai tambah layanan website &amp; undangan digital berkualitas ke klien Anda tanpa perlu merekrut tim programmer.
+                  </p>
+
+                  {/* Partnership benefits list */}
+                  <div className="mt-6 space-y-3 text-xs text-slate-700">
+                    <div className="flex items-start gap-3 rounded-2xl bg-slate-50/80 p-3.5 border border-slate-100">
+                      <span className="grid size-8 place-items-center rounded-xl bg-blue-100 text-[#0870e8] shrink-0 font-bold">
+                        <i className="fa-solid fa-hand-holding-dollar text-sm" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold text-xs sm:text-sm">Margin Keuntungan Menguntungkan</strong>
+                        <span className="text-slate-500 leading-relaxed">Dapatkan komisi bagi hasil hingga 30% atau bebas tentukan harga jual sendiri ke klien Anda.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 rounded-2xl bg-slate-50/80 p-3.5 border border-slate-100">
+                      <span className="grid size-8 place-items-center rounded-xl bg-indigo-100 text-indigo-600 shrink-0 font-bold">
+                        <i className="fa-solid fa-user-shield text-sm" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold text-xs sm:text-sm">100% White-Label (Brand Anda Sendiri)</strong>
+                        <span className="text-slate-500 leading-relaxed">Kami bekerja di balik layar secara profesional. Hubungan klien tetap menjadi aset berharga bisnis Anda.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 rounded-2xl bg-slate-50/80 p-3.5 border border-slate-100">
+                      <span className="grid size-8 place-items-center rounded-xl bg-emerald-100 text-emerald-600 shrink-0 font-bold">
+                        <i className="fa-solid fa-bolt text-sm" />
+                      </span>
+                      <div>
+                        <strong className="block text-slate-900 font-bold text-xs sm:text-sm">Pengerjaan Kilat &amp; Dukungan Teknis Penuh</strong>
+                        <span className="text-slate-500 leading-relaxed">Antrean pengerjaan prioritas 24-48 jam. Urusan koding, domain, hosting, dan maintenance ditangani 100% oleh Kinetra.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="text-xs text-slate-500">
+                    <span className="font-bold text-slate-800 block">Tanpa Biaya Pendaftaran</span>
+                    <span>Langsung aktif &amp; dapat materi promosi</span>
+                  </div>
+
+                  <a
+                    href={`${WA_BASE_URL}?text=Halo%20Kinetra%2C%20saya%20tertarik%20mendaftar%20sebagai%20Mitra%20Reseller%20%2F%20Partner%20jasa%20website%20dan%20undangan%20digital.`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full sm:w-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#0875ef] hover:bg-[#065cc0] text-white font-bold px-5 py-2.5 text-xs shadow-md shadow-blue-500/20 transition text-center"
+                  >
+                    <i className="fa-solid fa-handshake text-sm" />
+                    Daftar Kemitraan via WA
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ ACCORDION SECTION */}
         <section id="faq" className="scroll-mt-16 py-24 sm:py-32 bg-white">
           <div className="page-width">
@@ -1799,12 +2058,12 @@ export default function App() {
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-bold">Paket Solusi</h3>
+            <h3 className="text-sm font-bold">Paket &amp; Layanan</h3>
             <div className="mt-5 space-y-3.5 text-sm text-slate-400">
-              <a href="#harga" className="block hover:text-white transition">Paket Starter (1 Halaman)</a>
-              <a href="#harga" className="block hover:text-white transition">Paket Growth (Company Profile)</a>
-              <a href="#harga" className="block hover:text-white transition">Paket Pro (Katalog & Custom)</a>
-              <a href="#kalkulator" className="block hover:text-white transition">Kalkulator Estimasi Biaya</a>
+              <a href="#harga" className="block hover:text-white transition">Paket Website Berlangganan</a>
+              <a href="#harga" className="block hover:text-white transition">Web App &amp; Custom System</a>
+              <a href="#kemitraan" className="block hover:text-white transition">Jasa Undangan Digital</a>
+              <a href="#kemitraan" className="block hover:text-white transition">Program Kemitraan Vendor</a>
             </div>
           </div>
           <div>
@@ -1885,10 +2144,10 @@ export default function App() {
                   href={modalTemplate.demoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-200 transition"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-200 transition"
                 >
                   <span>Buka Tab Baru</span>
-                  <span>↗</span>
+                  <i className="fa-solid fa-arrow-up-right-from-square text-[10px]" />
                 </a>
 
                 <button
@@ -1976,102 +2235,8 @@ export default function App() {
         </div>
       )}
 
-      {/* FLOATING WHATSAPP CHAT ASSISTANT WIDGET */}
-      <div className="fixed bottom-6 right-6 z-50">
-        {chatOpen && (
-          <div className="mb-3 w-[310px] sm:w-[340px] rounded-2xl bg-white shadow-[0_20px_50px_rgba(15,47,122,.22)] border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
-            {/* Widget Header */}
-            <div className="bg-[#0F2F7A] p-4 text-white flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="relative grid size-9 place-items-center rounded-full bg-white/10 p-1">
-                  <img src="/brand/03-icon-favicon.svg" alt="" className="size-full" />
-                  <span className="absolute bottom-0 right-0 size-2.5 rounded-full bg-emerald-400 border border-[#0F2F7A]" />
-                </span>
-                <div>
-                  <div className="text-xs font-bold leading-tight">Konsultan Kinetra</div>
-                  <div className="text-[10px] text-emerald-300">Online · Balas Cepat</div>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setChatOpen(false)}
-                className="grid size-7 place-items-center rounded-lg text-slate-300 hover:text-white hover:bg-white/10"
-                aria-label="Tutup obrolan"
-              >
-                <Icon name="close" className="size-4" />
-              </button>
-            </div>
-
-            {/* Chat Body */}
-            <div className="p-4 bg-slate-50 space-y-3">
-              <div className="rounded-2xl rounded-tl-sm bg-white p-3 text-xs leading-relaxed text-slate-700 shadow-sm border border-slate-100">
-                Halo, selamat datang di Kinetra! Ada yang bisa kami bantu seputar pembuatan website untuk bisnis Anda hari ini?
-              </div>
-
-              {/* Quick Prompt Chips */}
-              <div className="space-y-1.5 pt-1">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                  Pilih topik cepat:
-                </div>
-                {[
-                  "Tanya Rekomendasi Paket Website",
-                  "Mau Konsultasi Desain & Logo",
-                  "Butuh Website Siap dalam 3 Hari",
-                ].map((prompt) => (
-                  <button
-                    key={prompt}
-                    type="button"
-                    onClick={() => handleSendChat(prompt)}
-                    className="w-full text-left rounded-xl border border-blue-200 bg-white p-2.5 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition flex items-center justify-between"
-                  >
-                    <span>{prompt}</span>
-                    <Icon name="arrow" className="size-3 text-blue-500" />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Custom Chat Input */}
-            <div className="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
-              <input
-                type="text"
-                placeholder="Tulis pertanyaan Anda..."
-                value={chatMessage}
-                onChange={(e) => setChatMessage(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSendChat()}
-                className="flex-1 rounded-xl border border-slate-200 px-3 py-2 text-xs focus:border-blue-500 focus:outline-none"
-              />
-              <button
-                type="button"
-                onClick={() => handleSendChat()}
-                className="grid size-8 place-items-center rounded-xl bg-[#25D366] text-white hover:bg-[#1ebe5d] transition shadow-sm"
-                aria-label="Kirim pesan ke WhatsApp"
-              >
-                <Icon name="send" className="size-3.5" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Floating Bubble Button */}
-        <button
-          type="button"
-          onClick={() => setChatOpen((prev) => !prev)}
-          className="group relative flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 text-white shadow-[0_12px_30px_rgba(37,211,102,.35)] transition-all hover:scale-105 hover:bg-[#1ebe5d] hover:shadow-[0_16px_36px_rgba(37,211,102,.45)]"
-          aria-label="Buka bantuan WhatsApp"
-        >
-          <span className="relative">
-            <Icon name="whatsapp" className="size-6" />
-            <span className="absolute -top-1 -right-1 size-2 rounded-full bg-white animate-ping" />
-          </span>
-          <span className="text-xs font-extrabold hidden sm:inline">Tanya Kami</span>
-          {!chatOpen && (
-            <span className="absolute -top-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-[#FF6B00] text-[10px] font-black text-white shadow-md">
-              1
-            </span>
-          )}
-        </button>
-      </div>
+      {/* INTERACTIVE AI CHAT ASSISTANT WIDGET */}
+      <KinetraAIChat />
     </div>
   );
 }
