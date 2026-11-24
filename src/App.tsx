@@ -151,10 +151,11 @@ function Icon({ name, className = "size-5" }: { name: IconName; className?: stri
 
 const HERO_TYPING_PHRASES = [
   "Siap dalam 3 hari.",
+  "Buat undangan digital Jogja.",
+  "Jasa pembuatan web kilat.",
   "Banjir order WhatsApp.",
   "Muncul di Google Maps.",
   "Desain mobile-first & cepat.",
-  "100% tanpa ribet koding.",
   "Mulai Rp 149rb/bulan.",
 ];
 
@@ -255,10 +256,12 @@ function SectionHeader({
   );
 }
 
-function HeroVisual() {
+function HeroVisual({ onShowToast }: { onShowToast?: (msg: string) => void }) {
   const [activeTab, setActiveTab] = useState<"analytics" | "mobile" | "maps">("analytics");
   const [selectedBar, setSelectedBar] = useState<number>(7);
   const [notifIndex, setNotifIndex] = useState<number>(0);
+  const [phoneTab, setPhoneTab] = useState<"home" | "layanan" | "booking">("home");
+  const [isNotifPaused, setIsNotifPaused] = useState(false);
 
   const notifications = [
     {
@@ -281,59 +284,87 @@ function HeroVisual() {
     },
   ];
 
+  // Auto-cycle notification every 4.5 seconds unless paused
+  useEffect(() => {
+    if (isNotifPaused) return;
+    const interval = setInterval(() => {
+      setNotifIndex((prev) => (prev + 1) % notifications.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isNotifPaused, notifications.length]);
+
   const barData = [
-    { day: "Sen", value: 45, visits: "620" },
-    { day: "Sel", value: 60, visits: "890" },
-    { day: "Rab", value: 52, visits: "740" },
-    { day: "Kam", value: 78, visits: "1.120" },
-    { day: "Jum", value: 68, visits: "950" },
-    { day: "Sab", value: 92, visits: "1.450" },
-    { day: "Min", value: 85, visits: "1.280" },
-    { day: "Hari Ini", value: 100, visits: "1.620" },
+    { day: "Sen", value: 45, visits: "620", leads: 8 },
+    { day: "Sel", value: 60, visits: "890", leads: 14 },
+    { day: "Rab", value: 52, visits: "740", leads: 11 },
+    { day: "Kam", value: 78, visits: "1.120", leads: 19 },
+    { day: "Jum", value: 68, visits: "950", leads: 16 },
+    { day: "Sab", value: 92, visits: "1.450", leads: 26 },
+    { day: "Min", value: 85, visits: "1.280", leads: 22 },
+    { day: "Hari Ini", value: 100, visits: "1.620", leads: 31 },
   ];
+
+  const handleCopyOfficeAddress = () => {
+    const address = "Kinetra Digital Hub, Jl. Kaliurang KM 9, DI Yogyakarta";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(address);
+    }
+    if (onShowToast) {
+      onShowToast("Alamat kantor Kinetra disalin ke clipboard!");
+    }
+  };
 
   return (
     <div className="relative mx-auto w-full max-w-[570px] lg:ml-auto">
-      <div className="absolute -right-12 -top-14 size-52 rounded-full bg-cyan-300/20 blur-3xl" />
+      <div className="absolute -right-12 -top-14 size-52 rounded-full bg-cyan-300/20 blur-3xl animate-pulse" />
       <div className="absolute -bottom-12 left-4 size-48 rounded-full bg-blue-500/20 blur-3xl" />
 
       {/* Main Interactive Card */}
-      <div className="relative rounded-[28px] border border-white/80 bg-white/90 p-3.5 shadow-[0_30px_80px_rgba(23,58,107,.18)] backdrop-blur">
+      <div className="relative rounded-[28px] border border-white/80 bg-white/90 p-3.5 shadow-[0_30px_80px_rgba(23,58,107,.18)] backdrop-blur transition-all duration-300 hover:shadow-[0_35px_90px_rgba(8,112,232,.18)]">
         {/* Top Control Bar */}
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#e5edf6] bg-white px-3.5 py-2.5 rounded-t-[20px]">
           <div className="flex items-center gap-1.5">
-            <span className="size-2.5 rounded-full bg-[#ff7a7a]" />
-            <span className="size-2.5 rounded-full bg-[#ffc85e]" />
-            <span className="size-2.5 rounded-full bg-[#4bd3a4]" />
+            <span className="size-2.5 rounded-full bg-[#ff7a7a] transition-transform hover:scale-125 cursor-pointer" />
+            <span className="size-2.5 rounded-full bg-[#ffc85e] transition-transform hover:scale-125 cursor-pointer" />
+            <span className="size-2.5 rounded-full bg-[#4bd3a4] transition-transform hover:scale-125 cursor-pointer" />
             <span className="ml-2 text-[10px] font-bold text-slate-400">kinetra.web.id</span>
           </div>
           {/* Tab Switcher */}
-          <div className="inline-flex rounded-lg bg-slate-100 p-0.5 text-[11px] font-bold text-[#14253b]">
+          <div className="inline-flex rounded-xl bg-slate-100 p-1 text-[11px] font-bold text-[#14253b] shadow-inner">
             <button
               type="button"
               onClick={() => setActiveTab("analytics")}
-              className={`rounded-md px-2.5 py-1 transition ${
-                activeTab === "analytics" ? "bg-white text-[#0870e8] shadow-sm" : "hover:text-blue-600"
+              className={`rounded-lg px-2.5 py-1 transition-all ${
+                activeTab === "analytics"
+                  ? "bg-white text-[#0870e8] shadow-sm font-extrabold"
+                  : "text-slate-500 hover:text-blue-600"
               }`}
             >
+              <i className="fa-solid fa-chart-simple mr-1.5 text-[10px]" />
               Analytics
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("mobile")}
-              className={`rounded-md px-2.5 py-1 transition ${
-                activeTab === "mobile" ? "bg-white text-[#0870e8] shadow-sm" : "hover:text-blue-600"
+              className={`rounded-lg px-2.5 py-1 transition-all ${
+                activeTab === "mobile"
+                  ? "bg-white text-[#0870e8] shadow-sm font-extrabold"
+                  : "text-slate-500 hover:text-blue-600"
               }`}
             >
+              <i className="fa-solid fa-mobile-screen mr-1.5 text-[10px]" />
               Live Mobile
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("maps")}
-              className={`rounded-md px-2.5 py-1 transition ${
-                activeTab === "maps" ? "bg-white text-[#0870e8] shadow-sm" : "hover:text-blue-600"
+              className={`rounded-lg px-2.5 py-1 transition-all ${
+                activeTab === "maps"
+                  ? "bg-white text-[#0870e8] shadow-sm font-extrabold"
+                  : "text-slate-500 hover:text-blue-600"
               }`}
             >
+              <i className="fa-solid fa-map-location-dot mr-1.5 text-[10px]" />
               Google Maps
             </button>
           </div>
@@ -342,7 +373,7 @@ function HeroVisual() {
         {/* Tab Content Display */}
         <div className="overflow-hidden rounded-b-[20px] border-x border-b border-[#dfe9f5] bg-[#f8fbff] p-4 sm:p-5">
           {activeTab === "analytics" && (
-            <div>
+            <div className="animate-in fade-in duration-200">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
@@ -350,24 +381,28 @@ function HeroVisual() {
                   </div>
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="text-2xl font-black text-[#0b1d35]">8.650</span>
-                    <span className="inline-flex items-center text-xs font-bold text-[#0fac8d]">
+                    <span className="inline-flex items-center text-xs font-bold text-[#0fac8d] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                       <Icon name="arrow" className="size-3 -rotate-45" /> +42% pengunjung
                     </span>
                   </div>
                 </div>
-                <span className="grid size-9 place-items-center rounded-xl bg-blue-50 p-1 text-[#0870e8]">
+                <span className="grid size-9 place-items-center rounded-xl bg-blue-50 p-1 text-[#0870e8] shadow-sm">
                   <img src="/brand/03-icon-favicon.svg" alt="" className="size-full" />
                 </span>
               </div>
 
               {/* 3 Metric cards */}
               <div className="mt-4 grid grid-cols-3 gap-2.5">
-                <div className="rounded-xl border border-[#e1eaf5] bg-white p-2.5">
+                <div className="rounded-xl border border-[#e1eaf5] bg-white p-2.5 transition-all hover:border-blue-300 hover:shadow-sm">
                   <div className="text-[10px] font-semibold text-slate-400">Pesan WA</div>
-                  <div className="mt-0.5 text-base font-extrabold text-[#0b1d35]">142</div>
-                  <div className="text-[9px] font-bold text-[#0fac8d]">+34 bulan ini</div>
+                  <div className="mt-0.5 text-base font-extrabold text-[#0b1d35]">
+                    {142 + barData[selectedBar].leads}
+                  </div>
+                  <div className="text-[9px] font-bold text-[#0fac8d]">
+                    +{barData[selectedBar].leads} hari ini
+                  </div>
                 </div>
-                <div className="rounded-xl border border-[#e1eaf5] bg-white p-2.5">
+                <div className="rounded-xl border border-[#e1eaf5] bg-white p-2.5 transition-all hover:border-blue-300 hover:shadow-sm">
                   <div className="text-[10px] font-semibold text-slate-400">Google Rating</div>
                   <div className="mt-0.5 text-base font-extrabold text-[#0b1d35] flex items-center gap-1.5">
                     <span>4.9</span>
@@ -375,7 +410,7 @@ function HeroVisual() {
                   </div>
                   <div className="text-[9px] font-bold text-blue-600">128 ulasan</div>
                 </div>
-                <div className="rounded-xl border border-[#e1eaf5] bg-white p-2.5">
+                <div className="rounded-xl border border-[#e1eaf5] bg-white p-2.5 transition-all hover:border-blue-300 hover:shadow-sm">
                   <div className="text-[10px] font-semibold text-slate-400">Speed Score</div>
                   <div className="mt-0.5 text-base font-extrabold text-[#0fac8d]">99/100</div>
                   <div className="text-[9px] font-bold text-slate-400">Mobile Fast</div>
@@ -384,32 +419,45 @@ function HeroVisual() {
 
               {/* Interactive Bar Chart */}
               <div className="mt-4 rounded-xl border border-[#e1eaf5] bg-white p-3.5">
-                <div className="mb-3 flex items-center justify-between text-[11px]">
-                  <span className="font-bold text-[#14253b]">
-                    Traffic Harian:{" "}
-                    <span className="text-[#0870e8]">{barData[selectedBar].visits} kunjungan</span>
+                <div className="mb-2 flex items-center justify-between text-[11px]">
+                  <span className="font-bold text-[#14253b] flex items-center gap-1.5">
+                    <span>Traffic {barData[selectedBar].day}:</span>
+                    <span className="rounded-md bg-blue-50 px-2 py-0.5 font-black text-[#0870e8]">
+                      {barData[selectedBar].visits} kunjungan
+                    </span>
+                    <span className="text-[10px] text-emerald-600 font-semibold">
+                      ({barData[selectedBar].leads} leads)
+                    </span>
                   </span>
-                  <span className="text-[10px] text-slate-400">Klik bar untuk cek</span>
+                  <span className="text-[10px] text-slate-400 hidden sm:inline">
+                    Pilih bar untuk simulasi 👆
+                  </span>
                 </div>
-                <div className="flex h-24 items-end gap-2 pt-2">
+
+                <div className="flex h-24 items-end gap-2 pt-3">
                   {barData.map((b, i) => (
                     <button
                       key={b.day}
                       type="button"
                       onClick={() => setSelectedBar(i)}
-                      className="group flex-1 flex flex-col items-center h-full justify-end focus:outline-none"
+                      className="group flex-1 flex flex-col items-center h-full justify-end focus:outline-none transition-transform hover:-translate-y-0.5 relative"
                     >
+                      {selectedBar === i && (
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded bg-slate-900 px-1.5 py-0.5 text-[8px] font-black text-white shadow">
+                          {b.visits}
+                        </div>
+                      )}
                       <div
-                        className={`w-full rounded-t transition-all ${
+                        className={`w-full rounded-t transition-all duration-200 ${
                           selectedBar === i
-                            ? "bg-gradient-to-t from-[#ff6b00] to-[#ffa500] shadow-md shadow-orange-200"
+                            ? "bg-gradient-to-t from-[#ff6b00] to-[#ffa500] shadow-md shadow-orange-300/50 scale-x-105"
                             : "bg-gradient-to-t from-[#0b64e8] to-[#18bfff] opacity-65 group-hover:opacity-100"
                         }`}
                         style={{ height: `${b.value}%` }}
                       />
                       <span
-                        className={`mt-1 text-[8px] font-bold ${
-                          selectedBar === i ? "text-[#ff6b00]" : "text-slate-400"
+                        className={`mt-1.5 text-[8px] font-bold transition-colors ${
+                          selectedBar === i ? "text-[#ff6b00] font-black" : "text-slate-400"
                         }`}
                       >
                         {b.day}
@@ -422,42 +470,123 @@ function HeroVisual() {
           )}
 
           {activeTab === "mobile" && (
-            <div className="mx-auto max-w-[270px] rounded-[24px] border-[5px] border-[#13233a] bg-white p-2.5 shadow-xl">
+            <div className="animate-in fade-in duration-200 mx-auto max-w-[280px] rounded-[26px] border-[5px] border-[#13233a] bg-white p-2.5 shadow-2xl">
+              {/* Phone Status Bar */}
               <div className="flex justify-between items-center px-2 py-1 text-[9px] font-bold text-slate-400">
                 <span>09:41</span>
                 <span className="flex items-center gap-1.5">
-                  <span>5G</span>
+                  <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <i className="fa-solid fa-signal text-[8px]" />
+                  <i className="fa-solid fa-wifi text-[8px]" />
                   <i className="fa-solid fa-battery-full text-[9px]" />
                 </span>
               </div>
-              <div className="mt-1 rounded-xl bg-gradient-to-r from-[#0F2F7A] to-[#0870e8] p-3 text-white">
-                <div className="text-[9px] font-extrabold uppercase tracking-widest text-cyan-200">
-                  Klinik Medika Pratama
-                </div>
-                <div className="mt-1 text-sm font-black leading-snug">
-                  Layanan Kesehatan Ramah & Terpercaya di Kota Anda
-                </div>
+
+              {/* Interactive Phone Sub-Tabs */}
+              <div className="mt-1 flex rounded-lg bg-slate-100 p-0.5 text-[9px] font-bold text-slate-600">
+                <button
+                  type="button"
+                  onClick={() => setPhoneTab("home")}
+                  className={`flex-1 rounded-md py-1 transition ${
+                    phoneTab === "home" ? "bg-white text-blue-600 shadow-sm font-extrabold" : ""
+                  }`}
+                >
+                  Beranda
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPhoneTab("layanan")}
+                  className={`flex-1 rounded-md py-1 transition ${
+                    phoneTab === "layanan" ? "bg-white text-blue-600 shadow-sm font-extrabold" : ""
+                  }`}
+                >
+                  Layanan
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPhoneTab("booking")}
+                  className={`flex-1 rounded-md py-1 transition ${
+                    phoneTab === "booking" ? "bg-white text-blue-600 shadow-sm font-extrabold" : ""
+                  }`}
+                >
+                  Booking WA
+                </button>
               </div>
-              <div className="mt-2.5 space-y-1.5 px-1">
-                <div className="flex items-center gap-2 rounded-lg bg-slate-50 p-2 text-[10px] font-bold text-slate-700">
-                  <span className="grid size-5 place-items-center rounded bg-emerald-100 text-emerald-600">
-                    <i className="fa-solid fa-check text-[10px]" />
-                  </span>
-                  Buka Setiap Hari (08.00 - 21.00)
+
+              {/* Phone Screen Views */}
+              {phoneTab === "home" && (
+                <div className="mt-2 animate-in fade-in duration-150">
+                  <div className="rounded-xl bg-gradient-to-r from-[#0F2F7A] to-[#0870e8] p-3 text-white shadow-sm">
+                    <div className="text-[9px] font-extrabold uppercase tracking-widest text-cyan-200">
+                      Klinik Medika Pratama
+                    </div>
+                    <div className="mt-1 text-xs font-black leading-snug">
+                      Layanan Kesehatan Ramah & Terpercaya di Kota Anda
+                    </div>
+                  </div>
+                  <div className="mt-2 space-y-1.5 px-0.5">
+                    <div className="flex items-center gap-2 rounded-lg bg-slate-50 p-2 text-[10px] font-bold text-slate-700 border border-slate-100">
+                      <span className="grid size-5 place-items-center rounded bg-emerald-100 text-emerald-600 shrink-0">
+                        <i className="fa-solid fa-clock text-[10px]" />
+                      </span>
+                      <span>Buka Setiap Hari (08.00 - 21.00)</span>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-lg bg-slate-50 p-2 text-[10px] font-bold text-slate-700 border border-slate-100">
+                      <span className="grid size-5 place-items-center rounded bg-blue-100 text-blue-600 shrink-0">
+                        <i className="fa-solid fa-user-doctor text-[10px]" />
+                      </span>
+                      <span>Dokter Spesialis & Umum Siap</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 rounded-lg bg-slate-50 p-2 text-[10px] font-bold text-slate-700">
-                  <span className="grid size-5 place-items-center rounded bg-blue-100 text-blue-600">
-                    <i className="fa-solid fa-check text-[10px]" />
-                  </span>
-                  Dokter Spesialis & Umum Tersedia
+              )}
+
+              {phoneTab === "layanan" && (
+                <div className="mt-2 space-y-1.5 animate-in fade-in duration-150">
+                  <div className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2 text-[10px]">
+                    <div>
+                      <div className="font-bold text-slate-900">Pemeriksaan Dokter</div>
+                      <div className="text-[8px] text-slate-500">Konsultasi dokter umum</div>
+                    </div>
+                    <span className="font-black text-blue-600">Rp 50rb</span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2 text-[10px]">
+                    <div>
+                      <div className="font-bold text-slate-900">Cek Lab Lengkap</div>
+                      <div className="text-[8px] text-slate-500">Gula darah, kolesterol, asam urat</div>
+                    </div>
+                    <span className="font-black text-blue-600">Rp 75rb</span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2 text-[10px]">
+                    <div>
+                      <div className="font-bold text-slate-900">Poli Gigi & Scaling</div>
+                      <div className="text-[8px] text-slate-500">Pembersihan karang gigi</div>
+                    </div>
+                    <span className="font-black text-blue-600">Rp 150rb</span>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {phoneTab === "booking" && (
+                <div className="mt-2 p-2 rounded-xl border border-slate-100 bg-slate-50 text-[10px] space-y-2 animate-in fade-in duration-150">
+                  <div className="font-extrabold text-slate-800">Form Janji Temu Cepat:</div>
+                  <div className="rounded-md bg-white border border-slate-200 px-2 py-1 text-slate-600 text-[9px]">
+                    Poli: Dokter Umum
+                  </div>
+                  <div className="rounded-md bg-white border border-slate-200 px-2 py-1 text-slate-600 text-[9px]">
+                    Jadwal: Hari Ini, Pukul 14:00 WIB
+                  </div>
+                  <div className="text-[9px] text-emerald-600 font-bold flex items-center gap-1">
+                    <i className="fa-solid fa-check text-[9px]" /> Slot konsultasi tersedia
+                  </div>
+                </div>
+              )}
+
               <a
                 href={WA_LINK}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#25D366] py-2 text-center text-[11px] font-black text-white shadow-md shadow-emerald-200 transition hover:bg-[#1ebe5d]"
+                className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-center text-[11px] font-black text-white shadow-md shadow-emerald-300/40 transition hover:bg-[#1ebe5d] active:scale-95"
               >
                 <Icon name="whatsapp" className="size-3.5" />
                 Daftar via WhatsApp Sekarang
@@ -466,18 +595,18 @@ function HeroVisual() {
           )}
 
           {activeTab === "maps" && (
-            <div className="rounded-xl border border-[#dfe7f0] bg-white p-4">
+            <div className="animate-in fade-in duration-200 rounded-xl border border-[#dfe7f0] bg-white p-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="inline-flex items-center gap-1 rounded bg-blue-50 px-2 py-0.5 text-[9px] font-bold text-blue-700">
+                  <div className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-0.5 text-[9px] font-bold text-blue-700">
                     <Icon name="check" className="size-3 text-blue-600" /> Terverifikasi Google Business
                   </div>
                   <h4 className="mt-1.5 text-base font-extrabold text-[#0b1d35]">
                     Kinetra Digital Hub
                   </h4>
-                  <p className="text-[11px] text-slate-500">Agensi Pemasaran & Desain Web</p>
+                  <p className="text-[11px] text-slate-500">Agensi Pembuatan Website & Digital Marketing</p>
                 </div>
-                <span className="grid size-10 place-items-center rounded-xl bg-amber-50 text-amber-500">
+                <span className="grid size-10 place-items-center rounded-xl bg-amber-50 text-amber-500 shadow-sm">
                   <Icon name="star" className="size-5 fill-amber-400 text-amber-400" />
                 </span>
               </div>
@@ -490,22 +619,28 @@ function HeroVisual() {
                   <i className="fa-solid fa-star" />
                   <i className="fa-solid fa-star" />
                 </span>
-                <span className="text-slate-400">(148 Ulasan Pelanggan)</span>
+                <span className="text-slate-400 font-normal">(148 Ulasan Pelanggan)</span>
               </div>
+
+              {/* Interactive Reviews pill preview */}
+              <div className="mt-3 rounded-lg bg-slate-50 border border-slate-100 p-2.5 text-[11px] text-slate-600">
+                <span className="font-bold text-slate-800 block mb-0.5">💬 Ulasan Teratas:</span>
+                "Pembuatan web cepat banget, 3 hari kelar dan langsung banyak yang tanya di WhatsApp!"
+              </div>
+
               <div className="mt-4 grid grid-cols-2 gap-2 text-[11px]">
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 py-2 font-bold text-slate-700 transition hover:bg-slate-50"
+                <button
+                  type="button"
+                  onClick={handleCopyOfficeAddress}
+                  className="flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 py-2 font-bold text-slate-700 transition hover:bg-slate-100 hover:border-slate-300 active:scale-95"
                 >
-                  <Icon name="map" className="size-3.5 text-blue-600" /> Petunjuk Rute
-                </a>
+                  <i className="fa-solid fa-copy text-slate-500 text-xs" /> Salin Alamat
+                </button>
                 <a
                   href={WA_LINK}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-1.5 rounded-lg bg-[#0F2F7A] py-2 font-bold text-white transition hover:bg-[#0870e8]"
+                  className="flex items-center justify-center gap-1.5 rounded-lg bg-[#0F2F7A] py-2 font-bold text-white transition hover:bg-[#0870e8] active:scale-95"
                 >
                   <Icon name="whatsapp" className="size-3.5" /> Kontak Langsung
                 </a>
@@ -515,30 +650,38 @@ function HeroVisual() {
         </div>
       </div>
 
-      {/* Interactive Rotating Floating Notification */}
-      <button
-        type="button"
-        onClick={() => setNotifIndex((prev) => (prev + 1) % notifications.length)}
-        className="absolute -bottom-8 -left-3 flex items-center gap-3 rounded-2xl border border-white bg-white/95 p-3.5 pr-6 shadow-[0_18px_45px_rgba(25,65,115,.16)] transition hover:scale-105 sm:-left-8 text-left"
-        title="Klik untuk lihat notifikasi lain"
+      {/* Interactive Rotating Floating Notification with Pause on Hover */}
+      <div
+        onMouseEnter={() => setIsNotifPaused(true)}
+        onMouseLeave={() => setIsNotifPaused(false)}
+        className="absolute -bottom-8 -left-3 sm:-left-8"
       >
-        <span className="relative grid size-10 place-items-center rounded-xl bg-[#eaf8f5] text-[#0fac8d]">
-          <span className="absolute -top-1 -right-1 size-3 rounded-full bg-emerald-500 animate-ping" />
-          <i className={`${notifications[notifIndex].iconClass} text-base`} />
-        </span>
-        <div>
-          <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#122742]">
-            <span>{notifications[notifIndex].title}</span>
-            <span className="text-[9px] text-[#0870e8] underline">ganti</span>
+        <button
+          type="button"
+          onClick={() => setNotifIndex((prev) => (prev + 1) % notifications.length)}
+          className="flex items-center gap-3 rounded-2xl border border-white bg-white/95 p-3.5 pr-6 shadow-[0_18px_45px_rgba(25,65,115,.16)] transition-all hover:scale-105 active:scale-95 text-left group"
+          title="Klik untuk ganti notifikasi"
+        >
+          <span className="relative grid size-10 place-items-center rounded-xl bg-[#eaf8f5] text-[#0fac8d] transition-colors group-hover:bg-[#d8f4ee]">
+            <span className="absolute -top-1 -right-1 size-3 rounded-full bg-emerald-500 animate-ping" />
+            <i className={`${notifications[notifIndex].iconClass} text-base`} />
+          </span>
+          <div>
+            <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#122742]">
+              <span>{notifications[notifIndex].title}</span>
+              <span className="text-[9px] text-[#0870e8] underline group-hover:text-blue-700">
+                ({notifIndex + 1}/{notifications.length})
+              </span>
+            </div>
+            <div className="text-xs text-slate-400 font-medium">
+              {notifications[notifIndex].sub}
+            </div>
           </div>
-          <div className="text-xs text-slate-400 font-medium">
-            {notifications[notifIndex].sub}
-          </div>
-        </div>
-      </button>
+        </button>
+      </div>
 
-      {/* Floating Badge Right */}
-      <div className="absolute -right-2 top-14 hidden items-center gap-2 rounded-xl border border-white bg-white/95 px-3.5 py-2.5 shadow-[0_16px_38px_rgba(25,65,115,.14)] sm:flex">
+      {/* Floating Badge Right with subtle bounce */}
+      <div className="absolute -right-2 top-14 hidden items-center gap-2 rounded-xl border border-white bg-white/95 px-3.5 py-2.5 shadow-[0_16px_38px_rgba(25,65,115,.14)] sm:flex animate-float">
         <span className="grid size-8 place-items-center rounded-lg bg-blue-50 text-blue-600">
           <Icon name="globe" className="size-4" />
         </span>
@@ -856,41 +999,60 @@ const packages = [
   },
 ];
 
-const faqs = [
+interface FaqItem {
+  question: string;
+  answer: string;
+  category: "Semua" | "Biaya & Paket" | "Pengerjaan" | "Fitur & Server" | "Kemitraan";
+}
+
+const faqs: FaqItem[] = [
   {
+    category: "Pengerjaan",
     question: "Berapa lama proses pembuatan website dari awal sampai online?",
     answer:
       "Untuk Paket Starter dan Growth rata-rata siap dalam 3–5 hari kerja setelah data usaha Anda (nama bisnis, foto, dan nomor kontak) kami terima. Untuk website custom kompleks (Paket Pro), pengerjaan memakan waktu sekitar 7–10 hari kerja.",
   },
   {
+    category: "Fitur & Server",
     question: "Apakah saya harus menyiapkan foto dan teks tulisan sendiri?",
     answer:
       "Tidak perlu khawatir! Jika Anda belum memiliki materi lengkap, tim Kinetra siap membantu menyusun copywriting (teks promosi yang persuasif) dan menyediakan kurasi foto profesional yang sesuai dengan sektor usaha Anda.",
   },
   {
+    category: "Biaya & Paket",
     question: "Apakah biaya paket sudah termasuk domain dan hosting?",
     answer:
       "Ya, seluruh paket Kinetra sudah ALL-IN! Sudah termasuk domain resmi (.com / .id / .my.id), cloud hosting berkecepatan tinggi, sertifikat keamanan SSL gratis, serta integrasi tombol WhatsApp tanpa biaya tersembunyi.",
   },
   {
+    category: "Fitur & Server",
     question: "Bagaimana jika nanti saya mau ganti nomor WhatsApp, foto, atau harga?",
     answer:
       "Kami membuat struktur website yang sangat fleksibel. Untuk paket Growth dan Pro, Anda mendapatkan layanan garansi maintenance bulanan di mana tim kami yang akan melakukan revisi dan update konten tersebut untuk Anda secara gratis.",
   },
   {
+    category: "Fitur & Server",
     question: "Apakah website ini nyaman dibuka di layar HP dan tidak lemot?",
     answer:
       "100% Mobile-First! Lebih dari 80% calon pembeli Anda akan membuka website dari ponsel. Seluruh website yang kami buat dioptimasi agar memuat sangat cepat (kurang dari 2 detik) dan responsif di semua ukuran layar.",
   },
   {
+    category: "Fitur & Server",
     question: "Apakah Kinetra juga menerima pembuatan Web Application atau sistem kustom?",
     answer:
       "Tentu saja! Di luar paket website standar, kami berpengalaman membangun Web Application kustom seperti Dashboard Admin, Sistem Kasir/POS, Portal Pelanggan & Karyawan, Sistem Booking Kompleks, hingga integrasi database dan Payment Gateway. Hubungi kami untuk konsultasi spesifikasi teknis bisnis Anda.",
   },
   {
+    category: "Kemitraan",
     question: "Bagaimana cara kerja program kemitraan pembuatan undangan digital & website?",
     answer:
       "Program kemitraan Kinetra terbuka untuk Wedding Organizer (WO), Event Organizer (EO), fotografer, percetakan, dan agensi kreatif. Tersedia sistem komisi menarik hingga 30% maupun sistem white-label (memakai nama brand Anda). Seluruh urusan teknis dan pengerjaan ditangani penuh oleh tim Kinetra.",
+  },
+  {
+    category: "Fitur & Server",
+    question: "Apakah Kinetra melayani jasa pembuatan web & buat undangan digital di Jogja dan seluruh Indonesia?",
+    answer:
+      "Tentu saja! Kinetra melayani jasa pembuatan web profesional, landing page bisnis, dan jasa buat undangan digital di Daerah Istimewa Yogyakarta (Jogja) serta melayani pesanan dari seluruh kota di Indonesia secara online dengan proses cepat dan revisi fleksibel.",
   },
 ];
 
@@ -966,14 +1128,67 @@ const calcAddons: CalcAddonItem[] = [
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Scroll Progress, Active Nav Spy, and Back to Top
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  // Global Toast Notification
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+  };
+
+  useEffect(() => {
+    if (!toastMessage) return;
+    const timer = setTimeout(() => {
+      setToastMessage(null);
+    }, 3500);
+    return () => clearTimeout(timer);
+  }, [toastMessage]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollProgress(progress);
+      setIsScrolled(window.scrollY > 20);
+      setShowBackToTop(window.scrollY > 400);
+
+      const sectionIds = ["layanan", "template", "portofolio", "harga", "kemitraan", "faq"];
+      const current = sectionIds.find((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 200 && rect.bottom >= 150;
+        }
+        return false;
+      });
+      if (current) {
+        setActiveSection(`#${current}`);
+      } else if (window.scrollY < 200) {
+        setActiveSection("");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Typewriter Hero Animation
   const { displayText: typedHeroText, nextPhrase: handleNextHeroPhrase } =
     useTypewriter(HERO_TYPING_PHRASES);
 
-  // Template Filter & Modal State
+  // Template Filter, Search & Modal State
   const [activeCategory, setActiveCategory] = useState<string>("Semua");
+  const [templateSearch, setTemplateSearch] = useState<string>("");
   const [modalTemplate, setModalTemplate] = useState<TemplateItem | null>(null);
-  const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
+  const [previewDevice, setPreviewDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
+  const [iframeKey, setIframeKey] = useState<number>(0);
+
+  // Pricing Billing Cycle (Monthly vs Annually with 20% discount)
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annually">("monthly");
 
   // Pricing Calculator State
   const [calcPackage, setCalcPackage] = useState<number>(1); // default Growth
@@ -981,11 +1196,23 @@ export default function App() {
     "gmaps_verify",
   ]);
 
-  // FAQ Accordion State
+  // Reseller Simulator State
+  const [resellerClients, setResellerClients] = useState<number>(5);
+  const [resellerType, setResellerType] = useState<"website" | "undangan">("website");
+
+  // FAQ Search & Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [faqSearch, setFaqSearch] = useState<string>("");
+  const [faqCategory, setFaqCategory] = useState<string>("Semua");
 
   const currentCalcPkg = calcPackages[calcPackage];
-  const isDomainUpgradeFree = currentCalcPkg.id !== "starter";
+  const isDomainUpgradeFree = currentCalcPkg.id !== "starter" || billingCycle === "annually";
+
+  // Base price with discount if annual
+  const packageBasePrice =
+    billingCycle === "annually"
+      ? Math.round(currentCalcPkg.price * 0.8)
+      : currentCalcPkg.price;
 
   const toggleAddon = (id: string) => {
     // Domain upgrade gratis dan disabled jika memilih Growth atau Pro
@@ -1000,9 +1227,9 @@ export default function App() {
     const item = calcAddons.find((a) => a.id === addonId);
     return sum + (item && item.isMonthly ? item.price : 0);
   }, 0);
-  const totalBiayaBulanan = currentCalcPkg.price + monthlyAddonsCost;
+  const totalBiayaBulanan = packageBasePrice + monthlyAddonsCost;
 
-  // Hitung total add-on sekali bayar (Upgrade domain gratis untuk Growth & Pro)
+  // Hitung total add-on sekali bayar (Upgrade domain gratis untuk Growth & Pro atau Tahunan)
   const onetimeAddonsCost = selectedAddons.reduce((sum, addonId) => {
     const item = calcAddons.find((a) => a.id === addonId);
     if (!item || item.isMonthly) return sum;
@@ -1010,8 +1237,13 @@ export default function App() {
     return sum + item.price;
   }, 0);
 
-  // Rumus: Total Pembayaran Awal (3 Bulan Pertama) = (Total Biaya Bulanan * 3) + Total Add-on Sekali Bayar
-  const totalPembayaranAwal = totalBiayaBulanan * 3 + onetimeAddonsCost;
+  // Rumus: Total Pembayaran Awal
+  // Jika tahunan: totalBiayaBulanan * 12 + onetimeAddonsCost
+  // Jika bulanan: totalBiayaBulanan * 3 + onetimeAddonsCost (Penetrasi 3 Bulan Pertama)
+  const totalPembayaranAwal =
+    billingCycle === "annually"
+      ? totalBiayaBulanan * 12 + onetimeAddonsCost
+      : totalBiayaBulanan * 3 + onetimeAddonsCost;
 
   const formatRupiah = (val: number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -1021,10 +1253,77 @@ export default function App() {
     }).format(val);
   };
 
-  const filteredTemplates =
-    activeCategory === "Semua"
-      ? templateData
-      : templateData.filter((t) => t.themeGroup === activeCategory);
+  const filteredTemplates = templateData.filter((t) => {
+    const matchesCategory =
+      activeCategory === "Semua" ? true : t.themeGroup === activeCategory;
+    const q = templateSearch.trim().toLowerCase();
+    const matchesSearch =
+      q === ""
+        ? true
+        : t.title.toLowerCase().includes(q) ||
+          t.category.toLowerCase().includes(q) ||
+          t.body.toLowerCase().includes(q) ||
+          t.features.some((f) => f.toLowerCase().includes(q));
+    return matchesCategory && matchesSearch;
+  });
+
+  const categoryCounts: Record<string, number> = {
+    Semua: templateData.length,
+    Kesehatan: templateData.filter((t) => t.themeGroup === "Kesehatan").length,
+    Properti: templateData.filter((t) => t.themeGroup === "Properti").length,
+    Kuliner: templateData.filter((t) => t.themeGroup === "Kuliner").length,
+    Jasa: templateData.filter((t) => t.themeGroup === "Jasa").length,
+  };
+
+  const filteredFaqs = faqs.filter((f) => {
+    const matchesCat =
+      faqCategory === "Semua" ? true : f.category === faqCategory;
+    const q = faqSearch.trim().toLowerCase();
+    const matchesQuery =
+      q === ""
+        ? true
+        : f.question.toLowerCase().includes(q) ||
+          f.answer.toLowerCase().includes(q);
+    return matchesCat && matchesQuery;
+  });
+
+  const handleSectorFilter = (category: string, label: string) => {
+    setActiveCategory(category);
+    setTemplateSearch("");
+    showToast(`Menampilkan rekomendasi template untuk: ${label}`);
+    document.getElementById("template")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleCopyQuotation = () => {
+    const chosenAddons = selectedAddons
+      .map((id) => {
+        const a = calcAddons.find((item) => item.id === id);
+        if (!a) return null;
+        if (a.id === "upgrade_domain" && isDomainUpgradeFree) {
+          return `• ${a.title}: GRATIS (Termasuk di Paket ${currentCalcPkg.name})`;
+        }
+        return `• ${a.title}: ${formatRupiah(a.price)}${a.isMonthly ? " / bln" : " (sekali bayar)"}`;
+      })
+      .filter(Boolean)
+      .join("\n");
+
+    const text = [
+      "=== SIMULASI INVESTASI WEBSITE KINETRA ===",
+      `* Paket Pilihan: Paket ${currentCalcPkg.name} (${formatRupiah(packageBasePrice)} / bln)`,
+      `* Periode Tagihan: ${billingCycle === "annually" ? "Tahunan (Hemat 20% + Gratis Domain .com)" : "Bulanan (Promo 3 Bulan Pertama)"}`,
+      chosenAddons ? `* Fitur Tambahan:\n${chosenAddons}` : "* Fitur Tambahan: Standar Paket",
+      "------------------------------------------",
+      `• Total Pembayaran Awal: ${formatRupiah(totalPembayaranAwal)} (${billingCycle === "annually" ? "12 Bulan Penuh" : "3 Bulan Pertama"})`,
+      `• Tagihan Berikutnya: ${formatRupiah(totalBiayaBulanan)} / bln`,
+      "Gratis Biaya Setup (Rp 0) · Domain + Cloud Hosting Termasuk",
+      "Konsultasi WhatsApp: " + WA_LINK,
+    ].join("\n");
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    }
+    showToast("Rincian simulasi berhasil disalin ke clipboard! Siap dibagikan.");
+  };
 
   const buildWaCalculatorUrl = () => {
     const chosenAddonLines = selectedAddons
@@ -1048,11 +1347,12 @@ export default function App() {
 
     const lines = [
       "Halo Kinetra, saya ingin Kunci Promo & Konsultasi Paket Website Berlangganan:",
-      `* Paket Pilihan: Paket ${currentCalcPkg.name} (${formatRupiah(currentCalcPkg.price)} / bln)`,
+      `* Paket Pilihan: Paket ${currentCalcPkg.name} (${formatRupiah(packageBasePrice)} / bln)`,
+      `* Opsi Siklus: ${billingCycle === "annually" ? "Tahunan (Diskon 20%)" : "Bulanan"}`,
       fullAddonsText ? `* Fitur Tambahan:\n${fullAddonsText}` : "* Fitur Tambahan: Standar Paket",
-      "Rincian Pembayaran (Promo Penetrasi 3 Bulan Pertama):",
-      `• Total Pembayaran Awal (3 Bulan Pertama): ${formatRupiah(totalPembayaranAwal)}`,
-      `• Tagihan Bulan ke-4 dan seterusnya: ${formatRupiah(totalBiayaBulanan)} / bln`,
+      "Rincian Pembayaran:",
+      `• Total Pembayaran Awal: ${formatRupiah(totalPembayaranAwal)} (${billingCycle === "annually" ? "1 Tahun Penuh" : "3 Bulan Pertama"})`,
+      `• Tagihan Berikutnya: ${formatRupiah(totalBiayaBulanan)} / bln`,
       "",
       "Mohon info ketersediaan slot promo dan proses pengerjaannya. Terima kasih!",
     ];
@@ -1062,33 +1362,65 @@ export default function App() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-[#0b1d35]">
+      {/* Realtime Scroll Progress Bar */}
+      <div
+        className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#0870e8] via-[#00d2ff] to-[#ff6b00] z-[60] transition-all duration-75"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
       {/* Top Navigation */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/88 backdrop-blur-xl">
-        <div className="page-width flex h-[76px] items-center justify-between">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "border-b border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-sm py-0"
+            : "border-b border-slate-200/50 bg-white/80 backdrop-blur-md py-1"
+        }`}
+      >
+        <div className="page-width flex h-[72px] sm:h-[76px] items-center justify-between">
           <Logo />
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Navigasi utama">
-            {navLinks.map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className="text-[14px] font-semibold text-[#46566c] transition hover:text-[#0868e8]"
-              >
-                {label}
-              </a>
-            ))}
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigasi utama">
+            {navLinks.map(([label, href]) => {
+              const isActive = activeSection === href;
+              return (
+                <a
+                  key={href}
+                  href={href}
+                  className={`text-[13px] font-bold transition-all relative py-1.5 ${
+                    isActive
+                      ? "text-[#0868e8]"
+                      : "text-[#46566c] hover:text-[#0868e8]"
+                  }`}
+                >
+                  {label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0868e8] rounded-full animate-in fade-in" />
+                  )}
+                </a>
+              );
+            })}
           </nav>
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-primary hidden !min-h-10 !px-5 !text-[13px] sm:inline-flex"
-          >
-            <Icon name="whatsapp" className="size-4" />
-            Konsultasi Gratis
-          </a>
+
+          <div className="hidden sm:flex items-center gap-3">
+            {/* Online Status Badge */}
+            <div className="hidden xl:flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200/80 px-3 py-1 text-[11px] font-bold text-emerald-700">
+              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Tim Standby WhatsApp</span>
+            </div>
+
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary btn-shine !min-h-10 !px-5 !text-[13px]"
+            >
+              <Icon name="whatsapp" className="size-4" />
+              Konsultasi Gratis
+            </a>
+          </div>
+
           <button
             type="button"
-            className="grid size-10 place-items-center rounded-xl border border-slate-200 text-slate-700 lg:hidden"
+            className="grid size-10 place-items-center rounded-xl border border-slate-200 text-slate-700 lg:hidden hover:bg-slate-50 transition"
             onClick={() => setMenuOpen((value) => !value)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
@@ -1098,7 +1430,7 @@ export default function App() {
         </div>
         {menuOpen && (
           <nav
-            className="border-t border-slate-100 bg-white px-5 py-5 shadow-xl lg:hidden"
+            className="border-t border-slate-100 bg-white px-5 py-5 shadow-2xl lg:hidden animate-in slide-in-from-top-2 duration-200"
             aria-label="Navigasi mobile"
           >
             {navLinks.map(([label, href]) => (
@@ -1106,13 +1438,15 @@ export default function App() {
                 key={href}
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className="block border-b border-slate-100 py-3.5 text-sm font-semibold"
+                className={`block border-b border-slate-100 py-3.5 text-sm font-semibold transition ${
+                  activeSection === href ? "text-[#0870e8] font-bold" : "text-slate-700"
+                }`}
               >
                 {label}
               </a>
             ))}
-            <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn-primary mt-5 w-full">
-              Konsultasi Gratis
+            <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn-primary btn-shine mt-5 w-full">
+              Konsultasi Gratis via WA
             </a>
           </nav>
         )}
@@ -1125,7 +1459,7 @@ export default function App() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-white px-3.5 py-2 text-[11px] font-bold uppercase tracking-[.13em] text-[#0967db] shadow-sm">
                 <Icon name="spark" className="size-4 text-cyan-500" />
-                Partner Digital Bisnis Lokal & UMKM
+                Jasa Pembuatan Web &amp; Undangan Digital · Jogja &amp; Seluruh Indonesia
               </div>
               <h1 className="mt-7 max-w-[760px] text-[clamp(2.7rem,5.5vw,5rem)] font-black leading-[1.04] tracking-[-0.06em] text-[#0b1d35]">
                 Website bisnis, <span className="text-gradient">terima beres.</span>
@@ -1142,8 +1476,7 @@ export default function App() {
                 </span>
               </h1>
               <p className="mt-7 max-w-[610px] text-[17px] leading-8 text-[#5d6d83] sm:text-[18px]">
-                Solusi website profesional terintegrasi Google Maps & WhatsApp, khusus untuk UMKM
-                dan bisnis lokal yang ingin lebih terpercaya dan banjir pesanan.
+                Solusi jasa pembuatan web profesional &amp; buat undangan digital interaktif di Jogja dan seluruh Indonesia. Terintegrasi Google Maps &amp; WhatsApp agar bisnis makin terpercaya dan banjir order.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn-primary">
@@ -1169,37 +1502,37 @@ export default function App() {
                 )}
               </div>
             </div>
-            <HeroVisual />
+            <HeroVisual onShowToast={showToast} />
           </div>
         </section>
 
-        {/* TRUST BADGE STRIP */}
+        {/* TRUST BADGE STRIP WITH INTERACTIVE CATEGORY QUICK-JUMP */}
         <section className="border-y border-[#e8eef5] bg-white py-6">
           <div className="page-width flex flex-col items-center justify-between gap-5 md:flex-row">
-            <p className="text-center text-xs font-bold uppercase tracking-[.18em] text-slate-400 md:text-left">
-              Cocok untuk aneka sektor bisnis lokal
+            <p className="text-center text-xs font-bold uppercase tracking-[.18em] text-slate-400 md:text-left flex items-center gap-2">
+              <span className="size-1.5 rounded-full bg-blue-500 animate-pulse" />
+              Cocok untuk aneka sektor bisnis lokal:
             </p>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-extrabold text-[#526278] sm:gap-x-12">
-              <span className="hover:text-blue-600 transition flex items-center gap-2">
-                <i className="fa-solid fa-shop text-blue-500" />
-                <span>Toko & Retail</span>
-              </span>
-              <span className="hover:text-blue-600 transition flex items-center gap-2">
-                <i className="fa-solid fa-stethoscope text-emerald-500" />
-                <span>Klinik & Faskes</span>
-              </span>
-              <span className="hover:text-blue-600 transition flex items-center gap-2">
-                <i className="fa-solid fa-hotel text-teal-500" />
-                <span>Villa & Homestay</span>
-              </span>
-              <span className="hover:text-blue-600 transition flex items-center gap-2">
-                <i className="fa-solid fa-mug-hot text-amber-500" />
-                <span>Cafe & Kuliner</span>
-              </span>
-              <span className="hover:text-blue-600 transition flex items-center gap-2">
-                <i className="fa-solid fa-wrench text-indigo-500" />
-                <span>Jasa & Kontraktor</span>
-              </span>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-sm font-extrabold text-[#526278]">
+              {[
+                { label: "Toko & Retail", icon: "fa-solid fa-shop text-blue-500", cat: "Semua" },
+                { label: "Klinik & Faskes", icon: "fa-solid fa-stethoscope text-emerald-500", cat: "Kesehatan" },
+                { label: "Villa & Homestay", icon: "fa-solid fa-hotel text-teal-500", cat: "Properti" },
+                { label: "Cafe & Kuliner", icon: "fa-solid fa-mug-hot text-amber-500", cat: "Kuliner" },
+                { label: "Jasa & Kontraktor", icon: "fa-solid fa-wrench text-indigo-500", cat: "Jasa" },
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => handleSectorFilter(item.cat, item.label)}
+                  className="group flex items-center gap-2 rounded-xl border border-slate-200/80 bg-slate-50/80 px-3.5 py-1.5 transition-all duration-200 hover:border-blue-400 hover:bg-blue-50/70 hover:text-blue-600 hover:scale-105 active:scale-95 shadow-xs"
+                  title={`Klik untuk lihat rekomendasi desain ${item.label}`}
+                >
+                  <i className={`${item.icon} text-xs transition-transform group-hover:scale-110`} />
+                  <span className="text-xs sm:text-sm">{item.label}</span>
+                  <i className="fa-solid fa-arrow-right text-[10px] text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                </button>
+              ))}
             </div>
           </div>
         </section>
@@ -1216,16 +1549,16 @@ export default function App() {
               {services.map((service) => (
                 <article
                   key={service.title}
-                  className="service-card group relative overflow-hidden rounded-[24px] border border-[#e4ebf4] bg-white p-7 sm:p-8 flex flex-col justify-between"
+                  className="service-card group relative overflow-hidden rounded-[24px] border border-[#e4ebf4] bg-white p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:border-blue-300 hover:shadow-[0_25px_60px_rgba(8,112,232,.12)]"
                 >
                   <div>
-                    <span className="absolute right-7 top-7 text-5xl font-black tracking-[-.08em] text-[#eef3f8]">
+                    <span className="absolute right-7 top-7 text-5xl font-black tracking-[-.08em] text-[#eef3f8] group-hover:text-blue-100/70 transition-colors">
                       {service.number}
                     </span>
-                    <div className={`service-icon service-icon-${service.tone}`}>
+                    <div className={`service-icon service-icon-${service.tone} transition-transform group-hover:scale-110`}>
                       <Icon name={service.icon} className="size-6" />
                     </div>
-                    <h3 className="mt-7 max-w-[260px] text-[21px] font-extrabold leading-snug tracking-[-.025em]">
+                    <h3 className="mt-7 max-w-[260px] text-[21px] font-extrabold leading-snug tracking-[-.025em] group-hover:text-[#0870e8] transition-colors">
                       {service.title}
                     </h3>
                     <p className="mt-4 text-[14px] leading-6 text-[#68778b]">{service.body}</p>
@@ -1233,7 +1566,7 @@ export default function App() {
                       {service.perks.map((p) => (
                         <span
                           key={p}
-                          className="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+                          className="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700"
                         >
                           {p}
                         </span>
@@ -1249,7 +1582,7 @@ export default function App() {
                     Pelajari layanan{" "}
                     <Icon
                       name="arrow"
-                      className="size-4 transition-transform group-hover:translate-x-1"
+                      className="size-4 transition-transform group-hover:translate-x-1.5"
                     />
                   </a>
                 </article>
@@ -1258,102 +1591,164 @@ export default function App() {
           </div>
         </section>
 
-        {/* KATALOG TEMPLATE DENGAN FILTER & INTERACTIVE MODAL */}
+        {/* KATALOG TEMPLATE DENGAN FILTER, LIVE SEARCH & INTERACTIVE MODAL */}
         <section id="template" className="scroll-mt-16 bg-[#f4f8fc] py-24 sm:py-32">
           <div className="page-width">
-            <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+            <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end border-b border-slate-200/70 pb-8">
               <SectionHeader
                 align="left"
                 eyebrow="Katalog Template"
                 title="Pilih desain, kami sesuaikan untuk brand Anda"
                 description="Mulai lebih cepat dari template yang sudah terbukti efektif, lalu kami personalisasi warna, logo, foto produk, dan identitas bisnis Anda."
               />
-              {/* Category Filter Pills */}
-              <div className="flex flex-wrap gap-2">
-                {(["Semua", "Kesehatan", "Properti", "Kuliner", "Jasa"] as const).map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setActiveCategory(cat)}
-                    className={`rounded-xl px-4 py-2 text-xs font-bold transition ${
-                      activeCategory === cat
-                        ? "bg-[#0875ef] text-white shadow-md shadow-blue-200"
-                        : "border border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-600"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+
+              {/* Live Search & Category Controls */}
+              <div className="flex flex-col gap-3 w-full lg:w-auto">
+                {/* Search Bar */}
+                <div className="relative w-full lg:w-80">
+                  <i className="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                  <input
+                    type="text"
+                    value={templateSearch}
+                    onChange={(e) => setTemplateSearch(e.target.value)}
+                    placeholder="Cari template (klinik, cafe, kos, bengkel)..."
+                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-8 text-xs font-semibold text-slate-800 placeholder-slate-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  />
+                  {templateSearch && (
+                    <button
+                      type="button"
+                      onClick={() => setTemplateSearch("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-600"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                {/* Category Filter Pills with Item Count Badges */}
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  {(["Semua", "Kesehatan", "Properti", "Kuliner", "Jasa"] as const).map((cat) => {
+                    const isSelected = activeCategory === cat;
+                    const count = categoryCounts[cat] || 0;
+                    return (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => setActiveCategory(cat)}
+                        className={`rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5 ${
+                          isSelected
+                            ? "bg-[#0875ef] text-white shadow-md shadow-blue-200 scale-105"
+                            : "border border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-600"
+                        }`}
+                      >
+                        <span>{cat}</span>
+                        <span
+                          className={`rounded-full px-1.5 py-0.2 text-[10px] font-extrabold ${
+                            isSelected ? "bg-white/25 text-white" : "bg-slate-100 text-slate-500"
+                          }`}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredTemplates.map((item) => (
-                <article
-                  key={item.title}
-                  className="group overflow-hidden rounded-[22px] border border-[#dfe8f1] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(26,56,96,.12)] flex flex-col justify-between"
+            {/* Template Grid or Empty State */}
+            {filteredTemplates.length === 0 ? (
+              <div className="mt-14 rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center">
+                <i className="fa-solid fa-folder-open text-4xl text-slate-300" />
+                <h4 className="mt-4 text-lg font-bold text-slate-800">Tidak ada template yang cocok</h4>
+                <p className="mt-1.5 text-xs text-slate-500 max-w-md mx-auto">
+                  Tidak ditemukan template dengan kata kunci "{templateSearch}". Coba kata kunci lain atau reset filter kategori.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTemplateSearch("");
+                    setActiveCategory("Semua");
+                  }}
+                  className="btn-secondary !min-h-10 !px-4 !text-xs mt-5"
                 >
-                  <div>
-                    <TemplateMockup item={item} />
-                    <div className="p-6">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="rounded-full bg-[#edf5ff] px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[.11em] text-[#0967db]">
-                          {item.category}
-                        </span>
-                        <span className="text-[10px] font-semibold text-slate-400">{item.theme}</span>
-                      </div>
-                      <h3 className="mt-4 text-xl font-extrabold tracking-[-.02em]">{item.title}</h3>
-                      <p className="mt-2 text-[13px] leading-6 text-[#6b788b] min-h-[48px]">
-                        {item.body}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-1.5">
-                        {item.features.slice(0, 3).map((f) => (
-                          <span
-                            key={f}
-                            className="rounded-md border border-slate-100 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-500 flex items-center gap-1"
-                          >
-                            <i className="fa-solid fa-check text-emerald-500 text-[9px]" />
-                            <span>{f}</span>
+                  Reset Pencarian &amp; Filter
+                </button>
+              </div>
+            ) : (
+              <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredTemplates.map((item) => (
+                  <article
+                    key={item.title}
+                    className="group overflow-hidden rounded-[22px] border border-[#dfe8f1] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_rgba(26,56,96,.13)] hover:border-blue-300 flex flex-col justify-between"
+                  >
+                    <div>
+                      <TemplateMockup item={item} />
+                      <div className="p-6">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="rounded-full bg-[#edf5ff] px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[.11em] text-[#0967db]">
+                            {item.category}
                           </span>
-                        ))}
+                          <span className="text-[10px] font-semibold text-slate-400">{item.theme}</span>
+                        </div>
+                        <h3 className="mt-4 text-xl font-extrabold tracking-[-.02em] group-hover:text-blue-600 transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-[13px] leading-6 text-[#6b788b] min-h-[48px]">
+                          {item.body}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-1.5">
+                          {item.features.slice(0, 3).map((f) => (
+                            <span
+                              key={f}
+                              className="rounded-md border border-slate-100 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-500 flex items-center gap-1"
+                            >
+                              <i className="fa-solid fa-check text-emerald-500 text-[9px]" />
+                              <span>{f}</span>
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="p-6 pt-0 flex flex-col gap-2.5">
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="p-6 pt-0 flex flex-col gap-2.5">
+                      <div className="grid grid-cols-2 gap-2">
+                        <a
+                          href={item.demoUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-blue-50 text-[#0870e8] border border-blue-200 text-xs font-bold transition hover:bg-[#0870e8] hover:text-white active:scale-95"
+                        >
+                          <i className="fa-solid fa-arrow-up-right-from-square text-[11px]" />
+                          Buka Demo
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPreviewDevice("desktop");
+                            setIframeKey((k) => k + 1);
+                            setModalTemplate(item);
+                          }}
+                          className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[#dce5ef] text-xs font-bold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 bg-white active:scale-95"
+                        >
+                          <Icon name="eye" className="size-3.5 text-blue-500" />
+                          Preview Layar
+                        </button>
+                      </div>
                       <a
-                        href={item.demoUrl}
+                        href={`${WA_BASE_URL}?text=Halo%20Kinetra%2C%20saya%20tertarik%20menggunakan%20Template%20${encodeURIComponent(item.title)}%20(${encodeURIComponent(item.category)}).`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-blue-50 text-[#0870e8] border border-blue-200 text-xs font-bold transition hover:bg-[#0870e8] hover:text-white"
+                        className="btn-shine inline-flex min-h-10 items-center justify-center rounded-xl bg-[#0c203b] px-3 text-center text-xs font-bold text-white transition hover:bg-[#0967db]"
                       >
-                        <i className="fa-solid fa-arrow-up-right-from-square text-[11px]" />
-                        Buka Demo
+                        Pilih Template Ini via WA
                       </a>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setPreviewDevice("desktop");
-                          setModalTemplate(item);
-                        }}
-                        className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[#dce5ef] text-xs font-bold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 bg-white"
-                      >
-                        <Icon name="eye" className="size-3.5 text-blue-500" />
-                        Preview Layar
-                      </button>
                     </div>
-                    <a
-                      href={`${WA_BASE_URL}?text=Halo%20Kinetra%2C%20saya%20tertarik%20menggunakan%20Template%20${encodeURIComponent(item.title)}%20(${encodeURIComponent(item.category)}).`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-10 items-center justify-center rounded-xl bg-[#0c203b] px-3 text-center text-xs font-bold text-white transition hover:bg-[#0967db]"
-                    >
-                      Pilih Template Ini via WA
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
           </div>
         </section>
 
@@ -1836,9 +2231,9 @@ export default function App() {
         >
           <div className="page-width">
             <SectionHeader
-              eyebrow="Layanan Spesial & Kemitraan"
-              title="Jasa Undangan Digital & Peluang Kemitraan Vendor"
-              description="Solusi undangan online interaktif masa kini untuk calon pengantin dan panitia event, serta program kemitraan resmi dengan sistem komisi menguntungkan untuk WO, EO, fotografer, dan percetakan."
+              eyebrow="Layanan Spesial & Kemitraan Jogja & Nasional"
+              title="Jasa Pembuatan Undangan Digital Jogja & Seluruh Indonesia"
+              description="Solusi jasa buat undangan digital online elegan untuk pernikahan dan event di Yogyakarta (Jogja) maupun seluruh Indonesia, lengkap dengan program kemitraan vendor WO & EO."
             />
 
             {/* 2-Column Split: Undangan Digital & Program Kemitraan */}
@@ -1859,10 +2254,10 @@ export default function App() {
                   </div>
 
                   <h3 className="mt-4 text-2xl font-black text-slate-900 tracking-tight sm:text-3xl">
-                    Undangan Digital Elegan, Praktis &amp; Ramah Budget
+                    Buat Undangan Digital Elegan di Jogja &amp; Seluruh Indonesia
                   </h3>
                   <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    Sebarkan kabar bahagia ke ribuan keluarga dan teman tanpa repot dan tanpa batas biaya cetak fisik. Tampilan responsif di semua ponsel dengan visual sinematik, musik latar romantis, dan navigasi lokasi akurat.
+                    Jasa buat undangan digital online untuk calon pengantin dan panitia acara di Jogja serta seluruh pelosok Indonesia. Sebarkan kabar bahagia ke ribuan keluarga dan teman tanpa repot dan tanpa batas biaya cetak fisik. Tampilan responsif di semua ponsel dengan visual sinematik, musik latar romantis, dan navigasi Google Maps akurat.
                   </p>
 
                   {/* Feature highlights grid */}
