@@ -1,7 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import KinetraAIChat from "./KinetraAIChat";
 
-const WA_NUMBER = "6281234567890";
+const WA_NUMBER = "628983680129";
 const WA_BASE_URL = `https://wa.me/${WA_NUMBER}`;
 const WA_LINK = `${WA_BASE_URL}?text=Halo%20Kinetra%2C%20saya%20ingin%20konsultasi%20website.`;
 const CURRENT_YEAR = new Date().getFullYear();
@@ -305,7 +305,7 @@ function HeroVisual() {
             <span className="size-2.5 rounded-full bg-[#ff7a7a]" />
             <span className="size-2.5 rounded-full bg-[#ffc85e]" />
             <span className="size-2.5 rounded-full bg-[#4bd3a4]" />
-            <span className="ml-2 text-[10px] font-bold text-slate-400">kinetra-preview.id</span>
+            <span className="ml-2 text-[10px] font-bold text-slate-400">kinetra.web.id</span>
           </div>
           {/* Tab Switcher */}
           <div className="inline-flex rounded-lg bg-slate-100 p-0.5 text-[11px] font-bold text-[#14253b]">
