@@ -1196,14 +1196,8 @@ export default function App() {
     "gmaps_verify",
   ]);
 
-  // Reseller Simulator State
-  const [resellerClients, setResellerClients] = useState<number>(5);
-  const [resellerType, setResellerType] = useState<"website" | "undangan">("website");
-
-  // FAQ Search & Accordion State
+  // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [faqSearch, setFaqSearch] = useState<string>("");
-  const [faqCategory, setFaqCategory] = useState<string>("Semua");
 
   const currentCalcPkg = calcPackages[calcPackage];
   const isDomainUpgradeFree = currentCalcPkg.id !== "starter" || billingCycle === "annually";
@@ -1274,18 +1268,6 @@ export default function App() {
     Kuliner: templateData.filter((t) => t.themeGroup === "Kuliner").length,
     Jasa: templateData.filter((t) => t.themeGroup === "Jasa").length,
   };
-
-  const filteredFaqs = faqs.filter((f) => {
-    const matchesCat =
-      faqCategory === "Semua" ? true : f.category === faqCategory;
-    const q = faqSearch.trim().toLowerCase();
-    const matchesQuery =
-      q === ""
-        ? true
-        : f.question.toLowerCase().includes(q) ||
-          f.answer.toLowerCase().includes(q);
-    return matchesCat && matchesQuery;
-  });
 
   const handleSectorFilter = (category: string, label: string) => {
     setActiveCategory(category);
@@ -1749,8 +1731,6 @@ export default function App() {
             )}
           </div>
         </section>
-          </div>
-        </section>
 
         {/* PORTOFOLIO */}
         <section id="portofolio" className="scroll-mt-16 py-24 sm:py-32">
@@ -1821,6 +1801,31 @@ export default function App() {
               title="Pilih paket sesuai tahap bisnis Anda"
               description="Sekali bayar, langsung punya website profesional. Tanpa biaya kejutan dan tanpa proses yang berbelit."
             />
+
+            {/* Billing Cycle Toggle */}
+            <div className="mt-8 flex justify-center">
+              <div className="inline-flex items-center rounded-2xl bg-slate-100 p-1 border border-slate-200/80">
+                <button
+                  type="button"
+                  onClick={() => setBillingCycle("monthly")}
+                  className={`rounded-xl px-4 py-2 text-xs font-bold transition ${
+                    billingCycle === "monthly" ? "bg-white text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  Bayar Bulanan
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBillingCycle("annually")}
+                  className={`rounded-xl px-4 py-2 text-xs font-bold transition flex items-center gap-1.5 ${
+                    billingCycle === "annually" ? "bg-[#0875ef] text-white shadow-sm" : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  <span>Bayar Tahunan</span>
+                  <span className="rounded-full bg-emerald-500 text-white text-[10px] px-1.5 py-0.2">Hemat 20%</span>
+                </button>
+              </div>
+            </div>
 
             {/* Standard Package Cards */}
             <div className="mt-14 grid items-stretch gap-5 lg:grid-cols-3">
@@ -2214,6 +2219,14 @@ export default function App() {
                       <Icon name="whatsapp" />
                       Kunci Promo &amp; Konsultasi via WA
                     </a>
+                    <button
+                      type="button"
+                      onClick={handleCopyQuotation}
+                      className="btn-secondary w-full !min-h-11 !text-xs mt-2"
+                    >
+                      <i className="fa-regular fa-copy mr-1.5" />
+                      Salin Rincian Estimasi
+                    </button>
                     <p className="mt-2.5 text-center text-[10px] text-slate-400">
                       Gratis konsultasi &amp; kunci slot promo penetrasi hari ini.
                     </p>
@@ -2680,6 +2693,7 @@ export default function App() {
                     </span>
                   </div>
                   <iframe
+                    key={iframeKey}
                     src={modalTemplate.demoUrl}
                     className="w-full h-[calc(100%-28px)] bg-white border-0"
                     title={`Live Demo ${modalTemplate.title}`}
@@ -2692,6 +2706,7 @@ export default function App() {
                     <div className="w-16 h-2.5 bg-slate-800 rounded-full"></div>
                   </div>
                   <iframe
+                    key={iframeKey}
                     src={modalTemplate.demoUrl}
                     className="w-full flex-1 bg-white border-0"
                     title={`Mobile Demo ${modalTemplate.title}`}
@@ -2739,6 +2754,18 @@ export default function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Back to Top Floating Button */}
+      {showBackToTop && (
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-24 right-6 z-40 grid size-10 place-items-center rounded-full bg-white/95 border border-slate-200 shadow-xl text-slate-700 hover:text-blue-600 hover:scale-110 active:scale-95 transition"
+          title="Kembali ke atas"
+        >
+          <i className="fa-solid fa-arrow-up text-xs" />
+        </button>
       )}
 
       {/* INTERACTIVE AI CHAT ASSISTANT WIDGET */}
