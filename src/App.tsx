@@ -2597,7 +2597,7 @@ export default function App() {
                 className="inline-flex items-center gap-2 font-bold text-white hover:text-[#ffb27a] transition"
               >
                 <Icon name="whatsapp" className="size-4 text-emerald-400" />
-                WhatsApp: +62 812-3456-7890
+                WhatsApp: 0898-3680-129
               </a>
             </div>
           </div>

@@ -16,7 +16,7 @@ export interface ChatMessage {
   timestamp: string;
 }
 
-const WA_PHONE = "6281234567890";
+const WA_PHONE = "628983680129";
 const WA_BASE = `https://wa.me/${WA_PHONE}`;
 
 function getCurrentTime(): string {
